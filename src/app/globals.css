@@ -6,8 +6,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -41,6 +40,17 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  
+  /* DREEM Hub Brand Colors */
+  --color-dreem-orange: var(--dreem-orange);
+  --color-dreem-orange-light: var(--dreem-orange-light);
+  --color-dreem-orange-dark: var(--dreem-orange-dark);
+  --color-kcic-blue: var(--kcic-blue);
+  --color-kcic-blue-light: var(--kcic-blue-light);
+  --color-kcic-blue-dark: var(--kcic-blue-dark);
+  --color-kcic-green: var(--kcic-green);
+  --color-kcic-green-light: var(--kcic-green-light);
+  --color-kcic-green-dark: var(--kcic-green-dark);
 }
 
 :root {
@@ -76,6 +86,19 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  
+  /* DREEM Hub Brand Colors */
+  --dreem-orange: oklch(0.7 0.15 40);        /* #E97451 */
+  --dreem-orange-light: oklch(0.75 0.12 40); /* #FF9D7A */
+  --dreem-orange-dark: oklch(0.65 0.18 40);  /* #D85A3A */
+  
+  --kcic-blue: oklch(0.65 0.15 220);         /* #00ADDD */
+  --kcic-blue-light: oklch(0.7 0.12 220);    /* #33C4E8 */
+  --kcic-blue-dark: oklch(0.6 0.18 220);     /* #0096C4 */
+  
+  --kcic-green: oklch(0.7 0.15 130);         /* #80C738 */
+  --kcic-green-light: oklch(0.75 0.12 130);  /* #9FDB5C */
+  --kcic-green-dark: oklch(0.65 0.18 130);   /* #6BAF1F */
 }
 
 .dark {
@@ -110,6 +133,19 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  
+  /* DREEM Hub Brand Colors - Dark Mode */
+  --dreem-orange: oklch(0.7 0.15 40);        /* #E97451 */
+  --dreem-orange-light: oklch(0.75 0.12 40); /* #FF9D7A */
+  --dreem-orange-dark: oklch(0.65 0.18 40);  /* #D85A3A */
+  
+  --kcic-blue: oklch(0.65 0.15 220);         /* #00ADDD */
+  --kcic-blue-light: oklch(0.7 0.12 220);    /* #33C4E8 */
+  --kcic-blue-dark: oklch(0.6 0.18 220);     /* #0096C4 */
+  
+  --kcic-green: oklch(0.7 0.15 130);         /* #80C738 */
+  --kcic-green-light: oklch(0.75 0.12 130);  /* #9FDB5C */
+  --kcic-green-dark: oklch(0.65 0.18 130);   /* #6BAF1F */
 }
 
 @layer base {
@@ -118,5 +154,82 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  
+  /* Enhanced focus indicators for keyboard navigation */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-dreem-orange;
+  }
+  
+  /* Ensure focus indicators are visible on interactive elements */
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  [role="button"]:focus-visible,
+  [tabindex]:focus-visible {
+    @apply outline-2 outline-offset-2 outline-dreem-orange ring-2 ring-dreem-orange/30;
+  }
+  
+  /* Skip to main content link for screen readers */
+  .skip-to-main {
+    @apply absolute left-0 top-0 z-9999 -translate-y-full bg-dreem-orange text-white px-4 py-2 transition-transform;
+  }
+  
+  .skip-to-main:focus {
+    @apply translate-y-0;
+  }
+}
+
+@layer utilities {
+  /* Smooth transitions for all interactive elements */
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Enhanced button hover effects */
+  .btn-hover-lift {
+    @apply transition-all duration-300 hover:scale-105 hover:shadow-lg;
+  }
+  
+  /* Card hover effects */
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-2;
+  }
+  
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Custom bounce animation for flags */
+  @keyframes bounce-slow {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  .animate-bounce-slow {
+    animation: bounce-slow 3s ease-in-out infinite;
+  }
+}
+
+@layer components {
+  /* Enhanced button styles */
+  button, a[role="button"] {
+    @apply transition-all duration-300;
+  }
+  
+  button:hover, a[role="button"]:hover {
+    @apply transform;
+  }
+  
+  /* Link hover effects */
+  a:not([role="button"]) {
+    @apply transition-colors duration-300;
   }
 }
