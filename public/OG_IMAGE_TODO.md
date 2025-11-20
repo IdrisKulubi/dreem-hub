@@ -36,7 +36,7 @@ Create a professional Open Graph image to replace the placeholder.
    - Entrepreneurs/farmers (if available)
 
 #### Brand Colors
-- **DREEM Orange**: #E97451
+- **DREEM Orange**: #F7931E
 - **KCIC Blue**: #00ADDD
 - **KCIC Green**: #80C738
 

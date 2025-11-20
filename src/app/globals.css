@@ -88,9 +88,9 @@
   --sidebar-ring: oklch(0.708 0 0);
   
   /* DREEM Hub Brand Colors */
-  --dreem-orange: oklch(0.7 0.15 40);        /* #E97451 */
-  --dreem-orange-light: oklch(0.75 0.12 40); /* #FF9D7A */
-  --dreem-orange-dark: oklch(0.65 0.18 40);  /* #D85A3A */
+  --dreem-orange: #F7931E;        /* Brand Orange */
+  --dreem-orange-light: #FDBA5E;  /* Light Variant */
+  --dreem-orange-dark: #C77205;   /* Dark Variant */
   
   --kcic-blue: oklch(0.65 0.15 220);         /* #00ADDD */
   --kcic-blue-light: oklch(0.7 0.12 220);    /* #33C4E8 */
@@ -135,9 +135,9 @@
   --sidebar-ring: oklch(0.556 0 0);
   
   /* DREEM Hub Brand Colors - Dark Mode */
-  --dreem-orange: oklch(0.7 0.15 40);        /* #E97451 */
-  --dreem-orange-light: oklch(0.75 0.12 40); /* #FF9D7A */
-  --dreem-orange-dark: oklch(0.65 0.18 40);  /* #D85A3A */
+  --dreem-orange: #F7931E;        /* Brand Orange */
+  --dreem-orange-light: #FDBA5E;  /* Light Variant */
+  --dreem-orange-dark: #C77205;   /* Dark Variant */
   
   --kcic-blue: oklch(0.65 0.15 220);         /* #00ADDD */
   --kcic-blue-light: oklch(0.7 0.12 220);    /* #33C4E8 */

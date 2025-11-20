@@ -477,13 +477,13 @@ Gray: #8B8D90
 
 Secondary Brand: DREEM Hub
 
-Orange: #E97451
+Orange: #F7931E
 
 3.2 Color System
 Primary Palette:
-DREEM Orange (Primary CTA): #E97451
-├─ Light variant: #FF9D7A
-└─ Dark variant: #D85A3A
+DREEM Orange (Primary CTA): #F7931E
+├─ Light variant: #FDBA5E
+└─ Dark variant: #C77205
 
 KCIC Blue (Secondary): #00ADDD
 ├─ Light variant: #33C4E8
@@ -548,9 +548,9 @@ XL: 32px
 4XL: 96px
 3.5 Component Styles
 Buttons:
-css/* Primary Button (DREEM Orange) */
+/* Primary Button (DREEM Orange) */
 .btn-primary {
-  background: #E97451;
+  background: #F7931E;
   color: #FFFFFF;
   padding: 12px 32px;
   border-radius: 8px;
@@ -559,9 +559,9 @@ css/* Primary Button (DREEM Orange) */
   transition: all 0.3s ease;
 }
 .btn-primary:hover {
-  background: #D85A3A;
+  background: #C77205;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(233, 116, 81, 0.3);
+  box-shadow: 0 4px 12px rgba(247, 147, 30, 0.3);
 }
 
 /* Secondary Button (KCIC Blue) */
@@ -601,7 +601,7 @@ css.card {
 
 /* Country Card Variants */
 .card-kenya {
-  border-top: 4px solid #E97451;
+  border-top: 4px solid #F7931E;
 }
 .card-uganda {
   border-top: 4px solid #00ADDD;
@@ -704,7 +704,7 @@ Skeleton screens for loading content
 3.10 Country-Specific Design Elements
 Color Coding:
 
-Kenya: DREEM Orange (#E97451) accent
+Kenya: DREEM Orange (#F7931E) accent
 Uganda: KCIC Blue (#00ADDD) accent
 Tanzania: KCIC Green (#80C738) accent
 
@@ -736,7 +736,7 @@ css*:focus {
 
 **Data Visualization Palette:**
 ```
-Chart Primary: #E97451 (Orange)
+Chart Primary: #F7931E (Orange)
 Chart Secondary: #00ADDD (Blue)
 Chart Tertiary: #80C738 (Green)
 Chart Quaternary: #FFA726 (Yellow)
