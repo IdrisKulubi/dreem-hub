@@ -4,16 +4,18 @@ import { CountryCards } from "@/components/sections/country-cards";
 import { AboutMission } from "@/components/sections/about-mission";
 import { Footer } from "@/components/layout/footer";
 import { RevealHeading } from "@/components/ui/reveal-heading";
+import { ScrollGradientBackground } from "@/components/layout/scroll-gradient-background";
 
 export default function Home() {
   return (
-    <main id="main-content" className="min-h-screen">
+    <main id="main-content" className="min-h-screen relative">
+      <ScrollGradientBackground />
       {/* Hero Section */}
       <Hero />
-      
+
       {/* Impact Counter Section */}
       <ImpactCounter />
-      
+
       {/* Country Cards Section */}
       <section className="py-12 sm:py-16 md:py-20" aria-labelledby="country-programs-heading">
         <div className="container mx-auto px-4 sm:px-6">
@@ -28,10 +30,10 @@ export default function Home() {
           <CountryCards />
         </div>
       </section>
-      
+
       {/* About/Mission Section */}
       <AboutMission />
-      
+
       {/* Footer */}
       <Footer />
     </main>
