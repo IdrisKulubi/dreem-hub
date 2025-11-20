@@ -124,6 +124,5 @@ export const homeContent = {
         { name: "Mott Foundation", role: "Funder" },
         { name: "KCIC", role: "Hub Host (Kenya)" },
         { name: "WWF", role: "Hub Host (Tanzania)" },
-        { name: "IKEA", role: "Strategic Partner" }
     ]
 }
