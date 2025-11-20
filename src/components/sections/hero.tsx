@@ -2,27 +2,50 @@
 
 import { useEffect, useRef } from 'react'
 import Image from 'next/image'
-import { Button } from '@/components/ui/button'
-import { ArrowDown, Mail } from 'lucide-react'
 import gsap from 'gsap'
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-gsap.registerPlugin(ScrollToPlugin, ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger)
 
 export function Hero() {
   const backgroundRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
-    if (!backgroundRef.current || !contentRef.current) return
+    const backgroundElement = backgroundRef.current
+    const contentElement = contentRef.current
+    const videoElement = videoRef.current
+
+    if (!backgroundElement || !contentElement) return
+
+    let motionQuery: MediaQueryList | undefined
+
+    const handleMotionPreference = (event: MediaQueryListEvent) => {
+      if (!videoElement) return
+      if (event.matches) {
+        videoElement.pause()
+      } else {
+        void videoElement.play().catch(() => void 0)
+      }
+    }
+
+    if (typeof window !== 'undefined' && videoElement) {
+      motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+      if (motionQuery.matches) {
+        videoElement.pause()
+      } else {
+        void videoElement.play().catch(() => void 0)
+      }
+      motionQuery.addEventListener('change', handleMotionPreference)
+    }
 
     // Parallax effect on background
-    gsap.to(backgroundRef.current, {
+    gsap.to(backgroundElement, {
       yPercent: 30,
       ease: 'none',
       scrollTrigger: {
-        trigger: backgroundRef.current,
+        trigger: backgroundElement,
         start: 'top top',
         end: 'bottom top',
         scrub: 1
@@ -30,7 +53,7 @@ export function Hero() {
     })
 
     // Fade in content on load
-    gsap.from(contentRef.current.children, {
+    gsap.from(contentElement.children, {
       y: 50,
       opacity: 0,
       duration: 1,
@@ -40,17 +63,11 @@ export function Hero() {
     })
 
     return () => {
+      videoElement?.pause()
       ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+      motionQuery?.removeEventListener('change', handleMotionPreference)
     }
   }, [])
-
-  const scrollToImpact = () => {
-    gsap.to(window, {
-      duration: 1,
-      scrollTo: '#impact-section',
-      ease: 'power2.inOut'
-    })
-  }
 
   return (
     <section
@@ -61,15 +78,21 @@ export function Hero() {
 
 
       {/* Background Image with Overlay */}
-      <div ref={backgroundRef} className="absolute inset-0 z-0">
-        <Image
-          src="/hero-solar-agri.png"
-          alt="Solar panels in an agricultural field in East Africa"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-background/90" />
+      <div ref={backgroundRef} className="absolute inset-0 z-0 overflow-hidden">
+        <video
+          ref={videoRef}
+          className="absolute inset-0 h-full w-full object-cover"
+          autoPlay
+          muted
+          playsInline
+          loop
+          preload="metadata"
+          poster="/hero-solar-agri.png"
+          aria-hidden="true"
+        >
+          <source src="/hero.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-linear-to-b from-black/30 via-black/20 to-background/90" />
         <div className="absolute inset-0 bg-dreem-orange/10 mix-blend-overlay" />
       </div>
 
@@ -88,46 +111,23 @@ export function Hero() {
             driving climate action and sustainable development across Kenya, Uganda, and Tanzania.
           </p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center pt-4 px-4 sm:px-0">
-            <Button
-              size="lg"
-              onClick={scrollToImpact}
-              className="bg-dreem-orange hover:bg-dreem-orange-dark text-white text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 h-auto w-full sm:w-auto transition-all duration-300 hover:scale-105 shadow-lg shadow-dreem-orange/20 border-none"
-              aria-label="Learn more about our impact - scroll to impact section"
-            >
-              Learn More
-              <ArrowDown className="ml-2 h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
-            </Button>
-
-            <Button
-              size="lg"
-              variant="outline"
-              asChild
-              className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white hover:text-dreem-orange text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 h-auto w-full sm:w-auto transition-all duration-300 hover:scale-105"
-            >
-              <a href="mailto:info@dreemhub.org" aria-label="Contact us to get involved - send email to info@dreemhub.org">
-                <Mail className="mr-2 h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
-                Get Involved
-              </a>
-            </Button>
-          </div>
-
-          {/* Country Flags */}
-          <div
-            className="flex justify-center items-center gap-4 sm:gap-6 pt-6 sm:pt-8 text-4xl sm:text-5xl md:text-6xl drop-shadow-md"
-            role="img"
-            aria-label="Countries we serve: Kenya, Uganda, and Tanzania"
-          >
-            <span className="animate-bounce-slow hover:scale-110 transition-transform cursor-default" style={{ animationDelay: '0s' }} aria-label="Kenya" title="Kenya">🇰🇪</span>
-            <span className="animate-bounce-slow hover:scale-110 transition-transform cursor-default" style={{ animationDelay: '0.2s' }} aria-label="Uganda" title="Uganda">🇺🇬</span>
-            <span className="animate-bounce-slow hover:scale-110 transition-transform cursor-default" style={{ animationDelay: '0.4s' }} aria-label="Tanzania" title="Tanzania">🇹🇿</span>
+          <div className="pt-6 sm:pt-8">
+            <div className="mx-auto w-72 sm:w-64 md:w-80">
+              <Image
+                src="/hero-countries.png"
+                alt="Map icons highlighting Kenya, Uganda, and Tanzania"
+                width={288}
+                height={104}
+                className="w-full h-auto object-contain drop-shadow-lg"
+                priority
+              />
+            </div>
           </div>
         </div>
       </div>
 
       {/* Bottom Fade to Content */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background via-background/80 to-transparent z-1" aria-hidden="true" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-background via-background/80 to-transparent z-1" aria-hidden="true" />
     </section>
   )
 }

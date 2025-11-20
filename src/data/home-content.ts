@@ -28,7 +28,7 @@ export const homeContent = {
         {
             id: "kenya",
             name: "Kenya",
-            flag: "🇰🇪",
+            flag: "\u{1F1F0}\u{1F1EA}",
             organization: "KCIC",
             focus: "Horticulture & Dairy",
             about: "Launched in June 2024, the DREEM Hub Kenya is a flagship initiative by the Kenya Climate Innovation Center (KCIC). It focuses on reducing GHG emissions and transforming livelihoods in Kitui, Makueni, Isiolo, and Laikipia counties.",
@@ -47,7 +47,7 @@ export const homeContent = {
         {
             id: "tanzania",
             name: "Tanzania",
-            flag: "🇹🇿",
+            flag: "\u{1F1F9}\u{1F1FF}",
             organization: "WWF Tanzania",
             focus: "Fisheries (Dagaa) & Agriculture",
             about: "Coordinated by WWF Tanzania, the DREEM Hub Tanzania envisions a sustainable ecosystem for Productive Use of Solar Energy (PUSE). It initially focuses on the Mafia Island Dagaa value chain, replacing petrol generators with solar solutions.",
@@ -66,7 +66,7 @@ export const homeContent = {
         {
             id: "uganda",
             name: "Uganda",
-            flag: "🇺🇬",
+            flag: "\u{1F1FA}\u{1F1EC}",
             organization: "DREEM Hub Uganda",
             focus: "Fisheries & Agriculture",
             about: "Focusing on the fisheries value chain, DREEM Hub Uganda aims to modernize the sector through solar adoption, reducing post-harvest losses and improving livelihoods for fishing communities.",

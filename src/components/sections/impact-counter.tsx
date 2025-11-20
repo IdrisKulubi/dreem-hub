@@ -81,25 +81,16 @@ export function ImpactCounter() {
   }, [animateCounters])
 
   return (
-    <section ref={sectionRef} className="relative py-32 overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/impact-bg.png')" }}
-        />
-        <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]" />
-      </div>
-
-      <div className="container relative z-10 px-4 mx-auto">
+    <section ref={sectionRef} className="py-32">
+      <div className="container px-4 mx-auto">
         <div className="mb-20 text-center">
-          <div className="inline-block mb-4 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm">
-            <span className="text-sm font-medium text-emerald-400 tracking-wider uppercase">Our Impact</span>
+          <div className="inline-block mb-4 px-4 py-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/10">
+            <span className="text-sm font-medium text-emerald-600 dark:text-emerald-400 tracking-wider uppercase">Our Impact</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6 tracking-tight">
             Driving Tangible Change
           </h2>
-          <p className="max-w-2xl mx-auto text-lg text-gray-300 font-light leading-relaxed">
+          <p className="max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-300 font-light leading-relaxed">
             Empowering communities and transforming the region through sustainable innovation and direct action.
           </p>
         </div>
@@ -134,17 +125,17 @@ export function ImpactCounter() {
 
 function ImpactCard({ label, value, prefix = '', suffix = '' }: { label: string, value: number, prefix?: string, suffix?: string }) {
   return (
-    <div className="impact-card group relative p-8 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md hover:bg-white/10 transition-all duration-500 hover:-translate-y-2">
-      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-emerald-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+    <div className="impact-card group relative p-8 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2">
+      <div className="absolute inset-0 rounded-2xl bg-linear-to-br from-emerald-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
       <div className="relative z-10 flex flex-col items-center text-center">
-        <div className="mb-4 text-5xl md:text-6xl font-light text-white tracking-tighter">
-          <span className="text-emerald-400/80 mr-1 text-4xl align-top">{prefix}</span>
+        <div className="mb-4 text-5xl md:text-6xl font-light text-slate-900 dark:text-white tracking-tighter">
+          <span className="text-emerald-500 dark:text-emerald-400 mr-1 text-4xl align-top">{prefix}</span>
           <span className="counter-value" data-target={value}>0</span>
-          <span className="text-emerald-400/80 ml-1 text-4xl align-top">{suffix}</span>
+          <span className="text-emerald-500 dark:text-emerald-400 ml-1 text-4xl align-top">{suffix}</span>
         </div>
-        <div className="h-px w-12 bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent mb-4" />
-        <p className="text-sm font-medium text-gray-400 uppercase tracking-widest">
+        <div className="h-px w-12 bg-linear-to-r from-transparent via-emerald-500/70 to-transparent mb-4" />
+        <p className="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-widest">
           {label}
         </p>
       </div>
