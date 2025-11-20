@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from 'react'
 import { homeContent } from '@/data/home-content'
-import { RevealHeading } from '@/components/ui/reveal-heading'
 import { Network, Share2, Sprout } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -11,19 +10,43 @@ gsap.registerPlugin(ScrollTrigger)
 
 export function TheModel() {
     const sectionRef = useRef<HTMLDivElement>(null)
+    const cardsRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            gsap.from('.model-card', {
-                y: 50,
+            // Heading animation
+            gsap.from('.model-header', {
+                y: 30,
                 opacity: 0,
-                duration: 0.8,
-                stagger: 0.2,
+                duration: 1,
+                ease: 'power3.out',
                 scrollTrigger: {
                     trigger: sectionRef.current,
-                    start: 'top 75%',
+                    start: 'top 80%',
                 }
             })
+
+            // Cards animation
+            const cards = gsap.utils.toArray('.model-card')
+            gsap.fromTo(cards,
+                {
+                    y: 60,
+                    opacity: 0,
+                    scale: 0.95
+                },
+                {
+                    y: 0,
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.8,
+                    stagger: 0.15,
+                    ease: 'back.out(1.2)',
+                    scrollTrigger: {
+                        trigger: cardsRef.current,
+                        start: 'top 75%',
+                    }
+                }
+            )
         }, sectionRef)
         return () => ctx.revert()
     }, [])
@@ -31,32 +54,52 @@ export function TheModel() {
     const icons = [Network, Share2, Sprout]
 
     return (
-        <section ref={sectionRef} className="py-24 bg-white dark:bg-slate-950">
-            <div className="container px-4 sm:px-6">
-                <RevealHeading className="text-center mb-16">
-                    <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
+        <section ref={sectionRef} className="relative py-32 overflow-hidden bg-slate-50 dark:bg-slate-950">
+            {/* Background Elements */}
+            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+                <div className="absolute -top-[20%] -right-[10%] w-[600px] h-[600px] bg-dreem-orange/5 rounded-full blur-3xl opacity-50" />
+                <div className="absolute top-[40%] -left-[10%] w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-3xl opacity-50" />
+            </div>
+
+            <div className="container relative z-10 px-4 sm:px-6 mx-auto">
+                <div className="model-header text-center mb-20 max-w-4xl mx-auto">
+                    <span className="inline-block py-1 px-3 rounded-full bg-dreem-orange/10 text-dreem-orange text-sm font-semibold tracking-wide mb-6">
+                        OUR APPROACH
+                    </span>
+                    <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-400">
                         {homeContent.theModel.title}
                     </h2>
-                    <p className="text-xl text-dreem-orange font-medium mb-4">
+                    <p className="text-2xl text-slate-600 dark:text-slate-300 font-light mb-6">
                         {homeContent.theModel.subtitle}
                     </p>
-                    <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                    <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
                         {homeContent.theModel.description}
                     </p>
-                </RevealHeading>
+                </div>
 
-                <div className="grid md:grid-cols-3 gap-8">
+                <div ref={cardsRef} className="grid md:grid-cols-3 gap-8 lg:gap-12">
                     {homeContent.theModel.features.map((feature, index) => {
                         const Icon = icons[index]
                         return (
-                            <div key={index} className="model-card p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:shadow-lg transition-all duration-300">
-                                <div className="w-12 h-12 bg-dreem-orange/10 rounded-xl flex items-center justify-center mb-6 text-dreem-orange">
-                                    <Icon className="w-6 h-6" />
+                            <div
+                                key={index}
+                                className="model-card group relative p-8 rounded-3xl bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm border border-slate-200/50 dark:border-slate-800/50 hover:border-dreem-orange/30 dark:hover:border-dreem-orange/30 transition-all duration-500 hover:shadow-2xl hover:shadow-dreem-orange/5"
+                            >
+                                <div className="absolute inset-0 bg-gradient-to-br from-dreem-orange/0 to-dreem-orange/0 group-hover:from-dreem-orange/5 group-hover:to-transparent rounded-3xl transition-all duration-500" />
+
+                                <div className="relative z-10">
+                                    <div className="w-16 h-16 rounded-2xl bg-white dark:bg-slate-800 shadow-lg shadow-slate-200/50 dark:shadow-none flex items-center justify-center mb-8 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+                                        <Icon className="w-8 h-8 text-dreem-orange" strokeWidth={1.5} />
+                                    </div>
+
+                                    <h3 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white group-hover:text-dreem-orange transition-colors duration-300">
+                                        {feature.title}
+                                    </h3>
+
+                                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                                        {feature.description}
+                                    </p>
                                 </div>
-                                <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-                                <p className="text-muted-foreground leading-relaxed">
-                                    {feature.description}
-                                </p>
                             </div>
                         )
                     })}

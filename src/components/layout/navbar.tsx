@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { Menu } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -47,12 +48,15 @@ export function Navbar() {
             <div className="container px-4 sm:px-6 flex items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2 z-50">
-                    <span className={cn(
-                        "text-2xl font-bold tracking-tight transition-colors",
-                        isScrolled ? "text-slate-900 dark:text-white" : "text-white"
-                    )}>
-                        DREEM<span className="text-dreem-orange">Hub</span>
-                    </span>
+                    <Image
+                        src="/logo.png"
+                        alt="DREEM Hub"
+                        width={140}
+                        height={40}
+                        priority
+                        className="h-10 w-auto"
+                    />
+                    <span className="sr-only">DREEM Hub</span>
                 </Link>
 
                 {/* Desktop Navigation */}
