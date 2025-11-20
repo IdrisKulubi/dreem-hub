@@ -30,30 +30,25 @@ export function ImpactCounter() {
   const hasAnimated = useRef(false)
 
   const animateCounters = useCallback(() => {
+    if (hasAnimated.current) return
+    hasAnimated.current = true
+
     // Animate counter numbers counting up
     const counterElements = document.querySelectorAll('.counter-value')
-    
+
     counterElements.forEach((counter) => {
       const target = parseInt(counter.getAttribute('data-target') || '0')
       const element = counter as HTMLElement
-      
-      gsap.from(element, {
-        textContent: 0,
-        duration: 2,
-        ease: 'power1.out',
-        snap: { textContent: 1 },
-        onUpdate: function() {
-          const value = Math.ceil(parseFloat(element.textContent || '0'))
-          element.textContent = value.toLocaleString()
-        }
-      })
-      
+
+      // Reset to 0 first
+      element.textContent = '0'
+
       gsap.to(element, {
         textContent: target,
         duration: 2,
         ease: 'power1.out',
         snap: { textContent: 1 },
-        onUpdate: function() {
+        onUpdate: function () {
           const value = Math.ceil(parseFloat(element.textContent || '0'))
           element.textContent = value.toLocaleString()
         }
@@ -62,25 +57,12 @@ export function ImpactCounter() {
   }, [])
 
   useEffect(() => {
-    if (!sectionRef.current || hasAnimated.current) return
-
     const ctx = gsap.context(() => {
-      // Animate cards with stagger effect (fade in + slide up)
-      gsap.from('.metric-card', {
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 80%',
-          once: true,
-          onEnter: () => {
-            hasAnimated.current = true
-            animateCounters()
-          }
-        }
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: 'top 80%',
+        onEnter: animateCounters,
+        once: true
       })
     }, sectionRef)
 
@@ -88,51 +70,41 @@ export function ImpactCounter() {
   }, [animateCounters])
 
   return (
-    <section 
-      ref={sectionRef} 
-      id="impact-section"
-      className="py-12 sm:py-16 md:py-20 bg-muted/30 dark:bg-muted/20"
-      aria-labelledby="impact-heading"
-    >
-      <div className="container mx-auto px-4 sm:px-6">
-        <RevealHeading className="text-center mb-8 sm:mb-10 md:mb-12">
-          <h2 id="impact-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 px-2">
-            Our Impact Across East Africa
-          </h2>
-          <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto px-4">
-            Transforming agricultural value chains through solar energy innovation
+    <section ref={sectionRef} className="py-20 bg-background">
+      <div className="container px-4 mx-auto">
+        <div className="mb-12 text-center">
+          <RevealHeading>
+            Our Impact
+          </RevealHeading>
+          <p className="mt-4 text-muted-foreground">
+            Driving tangible change across the region
           </p>
-        </RevealHeading>
+        </div>
 
-        <div className="grid gap-4 sm:gap-5 md:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           <MetricCard
             title="Entrepreneurs Supported"
             value={impactMetrics.entrepreneurs}
             target={targets.entrepreneurs}
-            format="number"
-            icon="👥"
+            dataKey="entrepreneurs"
           />
           <MetricCard
             title="Jobs Created"
             value={impactMetrics.jobs}
             target={targets.jobs}
-            format="number"
-            icon="💼"
+            dataKey="jobs"
           />
           <MetricCard
-            title="GHG Emissions Reduced"
+            title="Tons of CO2e Reduced"
             value={impactMetrics.ghgReduced}
             target={targets.ghgReduced}
-            format="number"
-            unit="tonnes CO₂eq"
-            icon="🌱"
+            dataKey="ghgReduced"
           />
           <MetricCard
-            title="Funding Mobilized"
+            title="Funding Mobilized ($)"
             value={impactMetrics.fundingMobilized}
             target={targets.fundingMobilized}
-            format="currency"
-            icon="💰"
+            dataKey="fundingMobilized"
           />
         </div>
       </div>
@@ -140,66 +112,25 @@ export function ImpactCounter() {
   )
 }
 
-interface MetricCardProps {
-  title: string
-  value: number
-  target: number
-  format: 'number' | 'currency'
-  unit?: string
-  icon?: string
-}
-
-function MetricCard({ 
-  title, 
-  value, 
-  target, 
-  format, 
-  unit,
-  icon
-}: MetricCardProps) {
+function MetricCard({ title, value, target, dataKey }: { title: string, value: number, target: number, dataKey: string }) {
   const progress = (value / target) * 100
-  
+
   return (
-    <Card className="metric-card hover:shadow-lg dark:hover:shadow-dreem-orange/20 transition-all duration-300 hover:-translate-y-1 dark:bg-card/50 dark:border-slate-800">
-      <CardHeader className="pb-2 sm:pb-3">
-        <div className="flex items-center justify-between">
-          <CardTitle className="text-xs sm:text-sm font-medium text-muted-foreground dark:text-slate-400 leading-tight">
-            {title}
-          </CardTitle>
-          {icon && <span className="text-xl sm:text-2xl" role="img" aria-label={title}>{icon}</span>}
-        </div>
+    <Card>
+      <CardHeader className="pb-2">
+        <CardTitle className="text-sm font-medium text-muted-foreground">
+          {title}
+        </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-2 sm:space-y-3">
-        <div>
-          <div 
-            className="counter-value text-2xl sm:text-3xl md:text-4xl font-bold text-dreem-orange dark:text-dreem-orange-light"
-            data-target={value}
-            aria-live="polite"
-            aria-label={`${title}: ${value.toLocaleString()}${unit ? ' ' + unit : ''}`}
-          >
-            0
-          </div>
-          {unit && (
-            <p className="text-xs text-muted-foreground mt-1">{unit}</p>
-          )}
-          {format === 'currency' && (
-            <p className="text-xs text-muted-foreground mt-1">USD</p>
-          )}
+      <CardContent>
+        <div className="text-2xl font-bold mb-2">
+          <span className="counter-value" data-target={value}>0</span>
+          {dataKey === 'fundingMobilized' ? '+' : '+'}
         </div>
-        
-        <div className="space-y-1.5 sm:space-y-2">
-          <Progress 
-            value={progress} 
-            className="h-1.5 sm:h-2"
-            aria-label={`Progress towards target: ${Math.round(progress)}%`}
-          />
-          <div className="flex items-center justify-between text-[10px] sm:text-xs text-muted-foreground">
-            <span>Progress</span>
-            <span className="text-right">
-              Target: {format === 'currency' ? '$' : ''}{target.toLocaleString()}
-            </span>
-          </div>
-        </div>
+        <Progress value={progress} className="h-2" />
+        <p className="text-xs text-muted-foreground mt-2">
+          Target: {target.toLocaleString()}
+        </p>
       </CardContent>
     </Card>
   )
