@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/themes/theme-provider";
+import { Navbar } from "@/components/layout/navbar";
 import { Toaster } from "sonner";
 
 const inter = Inter({
@@ -53,17 +54,18 @@ export default function RootLayout({
       <body
         className={`${inter.variable} font-sans antialiased`}
       >
-         <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <a href="#main-content" className="skip-to-main">
-              Skip to main content
-            </a>
-            <Toaster position="top-right" />
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <a href="#main-content" className="skip-to-main">
+            Skip to main content
+          </a>
+          <Navbar />
+          <Toaster position="top-right" />
+          {children}
         </ThemeProvider>
       </body>
     </html>
