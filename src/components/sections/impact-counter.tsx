@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useRef, useCallback } from 'react'
-import { RevealHeading } from '@/components/ui/reveal-heading'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -13,14 +12,6 @@ const impactMetrics = {
   jobs: 2800,
   ghgReduced: 300000,
   fundingMobilized: 800000
-}
-
-// Targets for progress bars (kept for reference/calculations if needed, though visual style is changing)
-const targets = {
-  entrepreneurs: 1500,
-  jobs: 4000,
-  ghgReduced: 500000,
-  fundingMobilized: 1000000
 }
 
 export function ImpactCounter() {

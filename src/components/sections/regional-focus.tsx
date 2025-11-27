@@ -125,7 +125,7 @@ export function RegionalFocus() {
                                     <div className="grid sm:grid-cols-2 gap-4">
                                         {region.challenges.map((item, idx) => (
                                             <Card key={idx} className="border-none shadow-md hover:shadow-lg transition-shadow duration-300 bg-white dark:bg-slate-800 overflow-hidden group">
-                                                <div className="h-1 w-full bg-gradient-to-r from-dreem-orange to-amber-500" />
+                                                <div className="h-1 w-full bg-linear-to-r from-dreem-orange to-amber-500" />
                                                 <CardContent className="p-6">
                                                     <div className="flex items-start justify-between mb-4">
                                                         <div className="p-2 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-500">
@@ -154,7 +154,7 @@ export function RegionalFocus() {
                                         ))}
 
                                         {/* Add a summary/CTA card to fill the grid if odd number or just as an extra */}
-                                        <Card className="border-none shadow-md bg-gradient-to-br from-slate-900 to-slate-800 text-white flex flex-col justify-center items-center text-center p-6">
+                                        <Card className="border-none shadow-md bg-linear-to-br from-slate-900 to-slate-800 text-white flex flex-col justify-center items-center text-center p-6">
                                             <div className="mb-4 p-3 rounded-full bg-white/10">
                                                 <ArrowRight className="w-6 h-6 text-white" />
                                             </div>

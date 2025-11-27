@@ -66,7 +66,7 @@ export function TheModel() {
                     <span className="inline-block py-1 px-3 rounded-full bg-dreem-orange/10 text-dreem-orange text-sm font-semibold tracking-wide mb-6">
                         OUR APPROACH
                     </span>
-                    <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-400">
+                    <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-linear-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-400">
                         {homeContent.theModel.title}
                     </h2>
                     <p className="text-2xl text-slate-600 dark:text-slate-300 font-light mb-6">
@@ -85,7 +85,7 @@ export function TheModel() {
                                 key={index}
                                 className="model-card group relative p-8 rounded-3xl bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm border border-slate-200/50 dark:border-slate-800/50 hover:border-dreem-orange/30 dark:hover:border-dreem-orange/30 transition-all duration-500 hover:shadow-2xl hover:shadow-dreem-orange/5"
                             >
-                                <div className="absolute inset-0 bg-gradient-to-br from-dreem-orange/0 to-dreem-orange/0 group-hover:from-dreem-orange/5 group-hover:to-transparent rounded-3xl transition-all duration-500" />
+                                <div className="absolute inset-0 bg-linear-to-br from-dreem-orange/0 to-dreem-orange/0 group-hover:from-dreem-orange/5 group-hover:to-transparent rounded-3xl transition-all duration-500" />
 
                                 <div className="relative z-10">
                                     <div className="w-16 h-16 rounded-2xl bg-white dark:bg-slate-800 shadow-lg shadow-slate-200/50 dark:shadow-none flex items-center justify-center mb-8 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
