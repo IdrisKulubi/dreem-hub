@@ -136,59 +136,9 @@ Limited business/financial skills
 
 
 
-1.2.3 Leadership Quotes
-
-Quote from Kenya PM (KCIC representative)
-Quote from Uganda PM (implementing partner)
-Quote from Tanzania PM (WWF Tanzania representative)
-Professional headshots
-Titles and organizations
-Format: Testimonial-style cards with photos
-
-1.2.4 Implementation Model
-
-Hub-and-Spoke model diagram
-Spoke partner categories:
-
-Finance partners
-Skills development
-Enterprise support & development
-Community livelihood impact
-Research & knowledge management
-
-
-Value chain integration approach
-Innovation mechanisms
-
-1.3 Team Profiles
-Purpose: Showcase the expertise and people behind DREEM Hub
-Structure:
-
-Organized by country tabs/sections
-Team member cards with:
-
-Professional photo
-Name and title
-Organization affiliation
-Brief bio (150-200 words)
-Areas of expertise
-LinkedIn/contact (optional)
-Email contact button
 
 
 
-Team Categories:
-
-Core Hub Team (by country)
-Spoke Partners leadership
-Advisory Board members (if applicable)
-Technical experts
-
-Features:
-
-Filterable by country, expertise area, organization type
-Search functionality
-Responsive grid layout
 
 1.4 Knowledge Hub
 Purpose: Central repository for research, data, reports, and learning resources

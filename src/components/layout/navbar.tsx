@@ -17,7 +17,6 @@ import {
 
 const navItems = [
     { name: 'About', href: '/about' },
-    { name: 'Team', href: '/team' },
     { name: 'Knowledge Hub', href: '/knowledge-hub' },
     { name: 'Gallery', href: '/gallery' },
     { name: 'Partners', href: '/partners' },
