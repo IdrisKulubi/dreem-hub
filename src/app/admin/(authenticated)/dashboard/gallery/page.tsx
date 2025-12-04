@@ -40,6 +40,7 @@ export default async function GalleryPage() {
                                         alt={image.title || 'Gallery image'}
                                         fill
                                         className="object-cover transition-transform group-hover:scale-105"
+                                        unoptimized
                                     />
                                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
                                         <p className="text-white text-xs font-medium truncate mb-2">{image.title}</p>

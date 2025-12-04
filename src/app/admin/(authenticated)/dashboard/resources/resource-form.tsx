@@ -82,7 +82,7 @@ export function ResourceForm() {
                                 onClientUploadComplete={(res) => {
                                     if (res && res[0]) {
                                         setFile({
-                                            url: res[0].url,
+                                            url: res[0].ufsUrl,
                                             name: res[0].name,
                                             size: res[0].size,
                                         })

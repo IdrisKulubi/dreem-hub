@@ -50,6 +50,7 @@ export default async function GalleryPage({
                                     width={800}
                                     height={600}
                                     className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110"
+                                    unoptimized
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                                     <span className="text-dreem-orange text-xs font-bold uppercase tracking-wider mb-1">

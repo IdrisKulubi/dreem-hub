@@ -55,7 +55,7 @@ export function GalleryForm() {
                                 onClientUploadComplete={(res) => {
                                     if (res && res[0]) {
                                         setFile({
-                                            url: res[0].url,
+                                            url: res[0].ufsUrl,
                                             name: res[0].name,
                                         })
                                         toast.success('Image uploaded')
