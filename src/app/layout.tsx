@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     siteName: "DREEM Hub",
     images: [
       {
-        url: "/og-image.svg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "DREEM Hub - Solarizing Agricultural Value Chains",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "DREEM Hub | Solarizing Agricultural Value Chains Across East Africa",
     description: "Scaling solar energy adoption in agricultural value chains across Kenya, Uganda, and Tanzania.",
-    images: ["/og-image.svg"],
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,

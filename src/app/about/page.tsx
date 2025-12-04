@@ -62,7 +62,7 @@ export default function AboutPage() {
                 <div className="max-w-5xl">
                     <h1 ref={heroTextRef} className="text-5xl sm:text-7xl md:text-8xl font-bold tracking-tighter text-slate-900 dark:text-white mb-8 leading-[0.9]">
                         <span className="block overflow-hidden"><span className="char inline-block">We</span> <span className="char inline-block">Are</span></span>
-                        <span className="block overflow-hidden text-dreem-orange"><span className="char inline-block">DREEM</span> <span className="char inline-block">Hub.</span></span>
+                        <span className="block overflow-hidden bg-gradient-to-r from-dreem-orange via-kcic-green to-kcic-blue bg-clip-text "><span className="char inline-block">DREEM</span> <span className="char inline-block">Hub.</span></span>
                     </h1>
 
                     <div className="hero-sub max-w-2xl">
@@ -74,7 +74,7 @@ export default function AboutPage() {
                 </div>
 
                 {/* Abstract Background Element */}
-                <div className="absolute top-1/4 right-0 w-[50vw] h-[50vw] bg-gradient-to-b from-dreem-orange/5 to-transparent rounded-full blur-3xl -z-10 pointer-events-none" />
+                <div className="absolute top-1/4 right-0 w-[50vw] h-[50vw] bg-gradient-to-br from-dreem-orange/10 via-kcic-green/5 to-kcic-blue/10 rounded-full blur-3xl -z-10 pointer-events-none" />
             </section>
 
             {/* Content Sections */}
@@ -83,7 +83,7 @@ export default function AboutPage() {
                 {/* Mission */}
                 <section className="grid md:grid-cols-12 gap-12 items-start">
                     <div className="md:col-span-4">
-                        <span className="text-xs font-bold tracking-widest uppercase text-dreem-orange mb-4 block">The Mission</span>
+                        <span className="text-xs font-bold tracking-widest uppercase text-kcic-blue mb-4 block">The Mission</span>
                         <h2 className="text-3xl font-bold text-slate-900 dark:text-white">Empowering Communities</h2>
                     </div>
                     <div className="md:col-span-8">
@@ -96,7 +96,7 @@ export default function AboutPage() {
                 {/* The Approach (PUSE) */}
                 <section className="grid md:grid-cols-12 gap-12 items-start border-t border-slate-100 dark:border-slate-800 pt-24">
                     <div className="md:col-span-4">
-                        <span className="text-xs font-bold tracking-widest uppercase text-dreem-orange mb-4 block">Our Approach</span>
+                        <span className="text-xs font-bold tracking-widest uppercase text-kcic-green mb-4 block">Our Approach</span>
                         <h2 className="text-3xl font-bold text-slate-900 dark:text-white">PUSE Methodology</h2>
                     </div>
                     <div className="md:col-span-8 grid sm:grid-cols-2 gap-8">
@@ -107,11 +107,18 @@ export default function AboutPage() {
                                 Moving beyond basic lighting to energy that generates income—cooling milk, drying fish, irrigating crops.
                             </p>
                         </div>
-                        <div className="bg-slate-50 dark:bg-slate-900/50 p-8 rounded-2xl border border-slate-100 dark:border-slate-800 hover:border-dreem-orange/30 transition-colors duration-300">
-                            <Globe className="w-8 h-8 text-dreem-orange mb-6" />
+                        <div className="bg-slate-50 dark:bg-slate-900/50 p-8 rounded-2xl border border-slate-100 dark:border-slate-800 hover:border-kcic-blue/30 transition-colors duration-300">
+                            <Globe className="w-8 h-8 text-kcic-blue mb-6" />
                             <h3 className="text-xl font-bold mb-3 text-slate-900 dark:text-white">Ecosystem Building</h3>
                             <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
                                 Connecting technology providers, financiers, and farmers in a sustainable, self-reinforcing network.
+                            </p>
+                        </div>
+                        <div className="bg-slate-50 dark:bg-slate-900/50 p-8 rounded-2xl border border-slate-100 dark:border-slate-800 hover:border-kcic-green/30 transition-colors duration-300">
+                            <Users className="w-8 h-8 text-kcic-green mb-6" />
+                            <h3 className="text-xl font-bold mb-3 text-slate-900 dark:text-white">Community Focus</h3>
+                            <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                Prioritizing youth and women entrepreneurs to drive inclusive growth and sustainable development.
                             </p>
                         </div>
                     </div>
@@ -121,14 +128,14 @@ export default function AboutPage() {
                 <section className="py-12">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         {[
-                            { label: "Countries", value: "3" },
-                            { label: "Value Chains", value: "3" },
-                            { label: "Entrepreneurs", value: "1000+" },
-                            { label: "Impact", value: "Infinite" }
+                            { label: "Countries", value: "3", color: "text-dreem-orange" },
+                            { label: "Value Chains", value: "3", color: "text-kcic-blue" },
+                            { label: "Entrepreneurs", value: "1000+", color: "text-kcic-green" },
+                            { label: "Impact", value: "Infinite", color: "text-dreem-orange" }
                         ].map((stat, idx) => (
-                            <div key={idx} className="text-center md:text-left">
-                                <div className="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white mb-2 tracking-tight">{stat.value}</div>
-                                <div className="text-sm text-slate-500 uppercase tracking-widest font-medium">{stat.label}</div>
+                            <div key={idx} className="text-center md:text-left group">
+                                <div className={`text-4xl md:text-6xl font-bold mb-2 tracking-tight ${stat.color}`}>{stat.value}</div>
+                                <div className="text-sm text-slate-500 uppercase tracking-widest font-medium group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors">{stat.label}</div>
                             </div>
                         ))}
                     </div>
@@ -137,7 +144,7 @@ export default function AboutPage() {
                 {/* CTA */}
                 <section className="flex flex-col items-center text-center pt-12">
                     <h2 className="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white mb-8 tracking-tight">
-                        Join the <span className="text-dreem-orange">Movement.</span>
+                        Join the <span className="bg-gradient-to-r from-dreem-orange via-kcic-green to-kcic-blue bg-clip-text">Movement.</span>
                     </h2>
                     <div className="flex flex-wrap justify-center gap-4">
                         <Link href="/contact">

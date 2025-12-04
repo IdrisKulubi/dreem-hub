@@ -28,7 +28,7 @@ export default function ContactPage() {
       <section className="py-12 md:py-16">
         <div className="container">
           <div className="max-w-4xl mx-auto grid gap-6 md:gap-8 grid-cols-1 md:grid-cols-2">
-            
+
             {/* Email Card */}
             <Card className="group hover:shadow-lg transition-all duration-300 border-slate-200 dark:border-slate-800">
               <CardContent className="p-8 space-y-4">
@@ -97,10 +97,10 @@ export default function ContactPage() {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group p-4 rounded-xl bg-white dark:bg-slate-800 hover:bg-dreem-orange/10 border border-slate-200 dark:border-slate-700 hover:border-dreem-orange/50 transition-all duration-300 shadow-sm hover:shadow-md"
+                className="group p-4 rounded-xl bg-white dark:bg-slate-800 hover:bg-kcic-blue/10 border border-slate-200 dark:border-slate-700 hover:border-kcic-blue/50 transition-all duration-300 shadow-sm hover:shadow-md"
                 aria-label="Visit our LinkedIn page"
               >
-                <Linkedin className="h-6 w-6 text-slate-600 dark:text-slate-400 group-hover:text-dreem-orange transition-colors duration-300" aria-hidden="true" />
+                <Linkedin className="h-6 w-6 text-slate-600 dark:text-slate-400 group-hover:text-kcic-blue transition-colors duration-300" aria-hidden="true" />
               </a>
               <a
                 href="https://twitter.com"
@@ -115,10 +115,10 @@ export default function ContactPage() {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group p-4 rounded-xl bg-white dark:bg-slate-800 hover:bg-dreem-orange/10 border border-slate-200 dark:border-slate-700 hover:border-dreem-orange/50 transition-all duration-300 shadow-sm hover:shadow-md"
+                className="group p-4 rounded-xl bg-white dark:bg-slate-800 hover:bg-kcic-green/10 border border-slate-200 dark:border-slate-700 hover:border-kcic-green/50 transition-all duration-300 shadow-sm hover:shadow-md"
                 aria-label="Visit our Facebook page"
               >
-                <Facebook className="h-6 w-6 text-slate-600 dark:text-slate-400 group-hover:text-dreem-orange transition-colors duration-300" aria-hidden="true" />
+                <Facebook className="h-6 w-6 text-slate-600 dark:text-slate-400 group-hover:text-kcic-green transition-colors duration-300" aria-hidden="true" />
               </a>
             </div>
           </div>

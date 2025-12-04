@@ -64,7 +64,7 @@ export default function PartnersPage() {
         'WWF Tanzania coordinates the DREEM Hub in Tanzania, focusing on sustainable fisheries through solar adoption in the Mafia Island Dagaa value chain, replacing fossil fuel-based systems with clean energy solutions.',
       focus: ['Fisheries', 'Marine Conservation', 'Sustainable Energy'],
     },
-   
+
   ]
 
   return (
@@ -73,7 +73,7 @@ export default function PartnersPage() {
       <section className="relative py-20 md:py-28 lg:py-32">
         <div className="container">
           <div className="max-w-4xl mx-auto text-center space-y-6">
-            
+
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white">
               Building Impact Together
             </h1>
@@ -88,65 +88,73 @@ export default function PartnersPage() {
       <section ref={sectionRef} className="py-12 md:py-16 lg:py-20">
         <div className="container">
           <div className="max-w-6xl mx-auto space-y-8 md:space-y-12">
-            {partners.map((partner, index) => (
-              <Card
-                key={index}
-                className="partner-card group overflow-hidden border-slate-200 dark:border-slate-800 hover:border-dreem-orange/30 transition-all duration-500 hover:shadow-xl"
-              >
-                <CardContent className="p-0">
-                  <div className="grid md:grid-cols-[300px_1fr] gap-0">
-                    {/* Logo Section */}
-                    <div className="relative bg-linear-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800 p-8 md:p-12 flex items-center justify-center border-b md:border-b-0 md:border-r border-slate-200 dark:border-slate-800">
-                      <div className="relative w-full h-32 md:h-40">
-                        <Image
-                          src={partner.logo}
-                          alt={`${partner.name} logo`}
-                          fill
-                          className="object-contain filter group-hover:brightness-110 transition-all duration-300"
-                        />
-                      </div>
-                      {/* Decorative gradient overlay */}
-                      <div className="absolute inset-0 bg-linear-to-br from-dreem-orange/0 via-transparent to-kcic-blue/0 group-hover:from-dreem-orange/5 group-hover:to-kcic-blue/5 transition-all duration-500" />
-                    </div>
+            {partners.map((partner, index) => {
+              const colors = [
+                { border: 'hover:border-dreem-orange/30', badge: 'bg-dreem-orange/10 text-dreem-orange', focus: 'hover:border-dreem-orange/50 hover:bg-dreem-orange/5' },
+                { border: 'hover:border-kcic-blue/30', badge: 'bg-kcic-blue/10 text-kcic-blue', focus: 'hover:border-kcic-blue/50 hover:bg-kcic-blue/5' },
+                { border: 'hover:border-kcic-green/30', badge: 'bg-kcic-green/10 text-kcic-green', focus: 'hover:border-kcic-green/50 hover:bg-kcic-green/5' }
+              ][index % 3]
 
-                    {/* Content Section */}
-                    <div className="p-8 md:p-10 space-y-6">
-                      <div className="space-y-2">
-                        <div className="flex items-center gap-3 flex-wrap">
-                          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white">
-                            {partner.name}
-                          </h2>
-                          <span className="px-3 py-1 rounded-full bg-dreem-orange/10 text-dreem-orange text-xs font-semibold uppercase tracking-wider">
-                            {partner.role}
-                          </span>
+              return (
+                <Card
+                  key={index}
+                  className={`partner-card group overflow-hidden border-slate-200 dark:border-slate-800 ${colors.border} transition-all duration-500 hover:shadow-xl`}
+                >
+                  <CardContent className="p-0">
+                    <div className="grid md:grid-cols-[300px_1fr] gap-0">
+                      {/* Logo Section */}
+                      <div className="relative bg-linear-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800 p-8 md:p-12 flex items-center justify-center border-b md:border-b-0 md:border-r border-slate-200 dark:border-slate-800">
+                        <div className="relative w-full h-32 md:h-40">
+                          <Image
+                            src={partner.logo}
+                            alt={`${partner.name} logo`}
+                            fill
+                            className="object-contain filter group-hover:brightness-110 transition-all duration-300"
+                          />
                         </div>
+                        {/* Decorative gradient overlay */}
+                        <div className="absolute inset-0 bg-linear-to-br from-dreem-orange/0 via-transparent to-kcic-blue/0 group-hover:from-dreem-orange/5 group-hover:to-kcic-blue/5 transition-all duration-500" />
                       </div>
 
-                      <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
-                        {partner.description}
-                      </p>
-
-                      {/* Focus Areas */}
-                      <div className="space-y-3">
-                        <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wider">
-                          Focus Areas
-                        </h3>
-                        <div className="flex flex-wrap gap-2">
-                          {partner.focus.map((area, idx) => (
-                            <span
-                              key={idx}
-                              className="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm border border-slate-200 dark:border-slate-700 hover:border-dreem-orange/50 hover:bg-dreem-orange/5 transition-all duration-200"
-                            >
-                              {area}
+                      {/* Content Section */}
+                      <div className="p-8 md:p-10 space-y-6">
+                        <div className="space-y-2">
+                          <div className="flex items-center gap-3 flex-wrap">
+                            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white">
+                              {partner.name}
+                            </h2>
+                            <span className={`px-3 py-1 rounded-full ${colors.badge} text-xs font-semibold uppercase tracking-wider`}>
+                              {partner.role}
                             </span>
-                          ))}
+                          </div>
+                        </div>
+
+                        <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+                          {partner.description}
+                        </p>
+
+                        {/* Focus Areas */}
+                        <div className="space-y-3">
+                          <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wider">
+                            Focus Areas
+                          </h3>
+                          <div className="flex flex-wrap gap-2">
+                            {partner.focus.map((area, idx) => (
+                              <span
+                                key={idx}
+                                className={`px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm border border-slate-200 dark:border-slate-700 ${colors.focus} transition-all duration-200`}
+                              >
+                                {area}
+                              </span>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                  </CardContent>
+                </Card>
+              )
+            })}
           </div>
         </div>
       </section>
