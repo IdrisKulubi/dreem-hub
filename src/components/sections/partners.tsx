@@ -29,11 +29,28 @@ export function Partners() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
                     {homeContent.partners.map((partner, idx) => {
                         const hasLogo = partnerLogos[partner.name]
+                        const colors = [
+                            {
+                                border: 'hover:border-dreem-orange/30',
+                                text: 'text-dreem-orange dark:text-dreem-orange/90',
+                                bg: 'from-dreem-orange/5'
+                            },
+                            {
+                                border: 'hover:border-kcic-blue/30',
+                                text: 'text-kcic-blue dark:text-kcic-blue/90',
+                                bg: 'from-kcic-blue/5'
+                            },
+                            {
+                                border: 'hover:border-kcic-green/30',
+                                text: 'text-kcic-green dark:text-kcic-green/90',
+                                bg: 'from-kcic-green/5'
+                            }
+                        ][idx % 3]
 
                         return (
                             <div
                                 key={idx}
-                                className="group relative bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6 hover:shadow-lg hover:shadow-slate-200/50 dark:hover:shadow-slate-950/50 hover:scale-105 hover:border-dreem-orange/30 transition-all duration-300 flex flex-col items-center justify-center min-h-[180px]"
+                                className={`group relative bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6 hover:shadow-lg hover:shadow-slate-200/50 dark:hover:shadow-slate-950/50 hover:scale-105 ${colors.border} transition-all duration-300 flex flex-col items-center justify-center min-h-[180px]`}
                             >
                                 {hasLogo ? (
                                     <>
@@ -47,7 +64,7 @@ export function Partners() {
                                             />
                                         </div>
                                         <div className="text-center">
-                                            <div className="text-xs font-medium text-dreem-orange dark:text-dreem-orange/90 uppercase tracking-wider">
+                                            <div className={`text-xs font-medium ${colors.text} uppercase tracking-wider`}>
                                                 {partner.role}
                                             </div>
                                         </div>
@@ -56,7 +73,7 @@ export function Partners() {
                                     <>
                                         {/* Text Fallback for Missing Logos */}
                                         <div className="text-center space-y-3">
-                                            <div className="text-lg font-bold text-slate-800 dark:text-slate-200 group-hover:text-dreem-orange transition-colors">
+                                            <div className={`text-lg font-bold text-slate-800 dark:text-slate-200 group-hover:${colors.text} transition-colors`}>
                                                 {partner.name}
                                             </div>
                                             <div className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
@@ -64,7 +81,7 @@ export function Partners() {
                                             </div>
                                         </div>
                                         {/* Gradient Accent */}
-                                        <div className="absolute inset-0 bg-linear-to-br from-dreem-orange/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
+                                        <div className={`absolute inset-0 bg-linear-to-br ${colors.bg} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl`} />
                                     </>
                                 )}
                             </div>

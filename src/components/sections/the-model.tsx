@@ -80,19 +80,43 @@ export function TheModel() {
                 <div ref={cardsRef} className="grid md:grid-cols-3 gap-8 lg:gap-12">
                     {homeContent.theModel.features.map((feature, index) => {
                         const Icon = icons[index]
+                        const colors = [
+                            {
+                                text: 'text-dreem-orange',
+                                border: 'hover:border-dreem-orange/30 dark:hover:border-dreem-orange/30',
+                                shadow: 'hover:shadow-dreem-orange/5',
+                                bg: 'group-hover:from-dreem-orange/5',
+                                iconBg: 'group-hover:bg-dreem-orange/10'
+                            },
+                            {
+                                text: 'text-kcic-blue',
+                                border: 'hover:border-kcic-blue/30 dark:hover:border-kcic-blue/30',
+                                shadow: 'hover:shadow-kcic-blue/5',
+                                bg: 'group-hover:from-kcic-blue/5',
+                                iconBg: 'group-hover:bg-kcic-blue/10'
+                            },
+                            {
+                                text: 'text-kcic-green',
+                                border: 'hover:border-kcic-green/30 dark:hover:border-kcic-green/30',
+                                shadow: 'hover:shadow-kcic-green/5',
+                                bg: 'group-hover:from-kcic-green/5',
+                                iconBg: 'group-hover:bg-kcic-green/10'
+                            }
+                        ][index]
+
                         return (
                             <div
                                 key={index}
-                                className="model-card group relative p-8 rounded-3xl bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm border border-slate-200/50 dark:border-slate-800/50 hover:border-dreem-orange/30 dark:hover:border-dreem-orange/30 transition-all duration-500 hover:shadow-2xl hover:shadow-dreem-orange/5"
+                                className={`model-card group relative p-8 rounded-3xl bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm border border-slate-200/50 dark:border-slate-800/50 ${colors.border} transition-all duration-500 hover:shadow-2xl ${colors.shadow}`}
                             >
-                                <div className="absolute inset-0 bg-linear-to-br from-dreem-orange/0 to-dreem-orange/0 group-hover:from-dreem-orange/5 group-hover:to-transparent rounded-3xl transition-all duration-500" />
+                                <div className={`absolute inset-0 bg-linear-to-br from-transparent to-transparent ${colors.bg} group-hover:to-transparent rounded-3xl transition-all duration-500`} />
 
                                 <div className="relative z-10">
-                                    <div className="w-16 h-16 rounded-2xl bg-white dark:bg-slate-800 shadow-lg shadow-slate-200/50 dark:shadow-none flex items-center justify-center mb-8 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
-                                        <Icon className="w-8 h-8 text-dreem-orange" strokeWidth={1.5} />
+                                    <div className={`w-16 h-16 rounded-2xl bg-white dark:bg-slate-800 shadow-lg shadow-slate-200/50 dark:shadow-none flex items-center justify-center mb-8 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 ${colors.iconBg}`}>
+                                        <Icon className={`w-8 h-8 ${colors.text}`} strokeWidth={1.5} />
                                     </div>
 
-                                    <h3 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white group-hover:text-dreem-orange transition-colors duration-300">
+                                    <h3 className={`text-2xl font-bold mb-4 text-slate-900 dark:text-white group-hover:${colors.text} transition-colors duration-300`}>
                                         {feature.title}
                                     </h3>
 

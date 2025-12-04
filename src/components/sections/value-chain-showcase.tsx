@@ -81,10 +81,45 @@ export function ValueChainShowcase() {
                             // @ts-expect-error - Dynamic image mapping
                             const imageSrc = images[vc.id] || '/images/dairy_solar.png'
 
+                            const getVCColor = (id: string) => {
+                                switch (id) {
+                                    case 'dairy': return {
+                                        text: 'text-kcic-blue',
+                                        bg: 'bg-kcic-blue/10',
+                                        border: 'group-hover:border-kcic-blue/30',
+                                        icon: 'text-kcic-blue dark:text-kcic-blue-light',
+                                        badge: 'group-hover:bg-kcic-blue/10 group-hover:border-kcic-blue/30'
+                                    }
+                                    case 'horticulture': return {
+                                        text: 'text-kcic-green',
+                                        bg: 'bg-kcic-green/10',
+                                        border: 'group-hover:border-kcic-green/30',
+                                        icon: 'text-kcic-green dark:text-kcic-green-light',
+                                        badge: 'group-hover:bg-kcic-green/10 group-hover:border-kcic-green/30'
+                                    }
+                                    case 'fisheries': return {
+                                        text: 'text-dreem-orange',
+                                        bg: 'bg-dreem-orange/10',
+                                        border: 'group-hover:border-dreem-orange/30',
+                                        icon: 'text-dreem-orange dark:text-dreem-orange-light',
+                                        badge: 'group-hover:bg-dreem-orange/10 group-hover:border-dreem-orange/30'
+                                    }
+                                    default: return {
+                                        text: 'text-dreem-orange',
+                                        bg: 'bg-dreem-orange/10',
+                                        border: 'group-hover:border-dreem-orange/30',
+                                        icon: 'text-dreem-orange dark:text-dreem-orange-light',
+                                        badge: 'group-hover:bg-dreem-orange/10 group-hover:border-dreem-orange/30'
+                                    }
+                                }
+                            }
+
+                            const colors = getVCColor(vc.id)
+
                             return (
                                 <div
                                     key={vc.id}
-                                    className="vc-card group relative bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-slate-200 dark:border-slate-800 flex flex-col h-full"
+                                    className={`vc-card group relative bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-slate-200 dark:border-slate-800 ${colors.border} flex flex-col h-full`}
                                 >
                                     <div className="absolute inset-0 bg-linear-to-br from-transparent to-slate-50/50 dark:to-slate-800/50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
@@ -104,11 +139,11 @@ export function ValueChainShowcase() {
                                     <div className="relative z-10 p-6 flex flex-col grow">
                                         {/* Icon */}
                                         <div className="w-16 h-16 rounded-2xl bg-white dark:bg-slate-800 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-500 shadow-lg border-4 border-white dark:border-slate-900 -mt-14 relative shrink-0">
-                                            <Icon className="w-8 h-8 text-dreem-blue dark:text-dreem-orange group-hover:text-dreem-orange dark:group-hover:text-dreem-blue transition-colors duration-300" />
+                                            <Icon className={`w-8 h-8 ${colors.icon} transition-colors duration-300`} />
                                         </div>
 
                                         {/* Title */}
-                                        <h3 className="text-2xl font-bold mb-3 text-slate-900 dark:text-white group-hover:text-dreem-blue dark:group-hover:text-dreem-orange transition-colors duration-300">
+                                        <h3 className={`text-2xl font-bold mb-3 text-slate-900 dark:text-white group-hover:${colors.text} transition-colors duration-300`}>
                                             {vc.title}
                                         </h3>
 
@@ -126,7 +161,7 @@ export function ValueChainShowcase() {
                                                 {vc.technologies && vc.technologies.map((tech, idx) => (
                                                     <span
                                                         key={idx}
-                                                        className="inline-flex items-center px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 group-hover:border-dreem-blue/30 group-hover:bg-dreem-blue/10 transition-colors duration-300"
+                                                        className={`inline-flex items-center px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 ${colors.badge} transition-colors duration-300`}
                                                     >
                                                         {tech}
                                                     </span>

@@ -91,22 +91,26 @@ export function ImpactCounter() {
             label="Entrepreneurs Supported"
             value={impactMetrics.entrepreneurs}
             suffix="+"
+            color="blue"
           />
           <ImpactCard
             label="Jobs Created"
             value={impactMetrics.jobs}
             suffix="+"
+            color="blue"
           />
           <ImpactCard
             label="Tons of CO2e Reduced"
             value={impactMetrics.ghgReduced}
             suffix=""
+            color="green"
           />
           <ImpactCard
             label="Funding Mobilized"
             value={impactMetrics.fundingMobilized}
             prefix="$"
             suffix="+"
+            color="orange"
           />
         </div>
       </div>
@@ -114,18 +118,38 @@ export function ImpactCounter() {
   )
 }
 
-function ImpactCard({ label, value, prefix = '', suffix = '' }: { label: string, value: number, prefix?: string, suffix?: string }) {
+function ImpactCard({ label, value, prefix = '', suffix = '', color = 'green' }: { label: string, value: number, prefix?: string, suffix?: string, color?: 'green' | 'blue' | 'orange' }) {
+  const colorClasses = {
+    green: {
+      text: 'text-kcic-green dark:text-kcic-green-light',
+      bg: 'from-kcic-green/5 to-transparent',
+      border: 'via-kcic-green/70',
+    },
+    blue: {
+      text: 'text-kcic-blue dark:text-kcic-blue-light',
+      bg: 'from-kcic-blue/5 to-transparent',
+      border: 'via-kcic-blue/70',
+    },
+    orange: {
+      text: 'text-dreem-orange dark:text-dreem-orange-light',
+      bg: 'from-dreem-orange/5 to-transparent',
+      border: 'via-dreem-orange/70',
+    }
+  }
+
+  const colors = colorClasses[color]
+
   return (
     <div className="impact-card group relative p-8 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2">
-      <div className="absolute inset-0 rounded-2xl bg-linear-to-br from-emerald-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className={`absolute inset-0 rounded-2xl bg-linear-to-br ${colors.bg} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
 
       <div className="relative z-10 flex flex-col items-center text-center">
         <div className="mb-4 text-5xl md:text-6xl font-light text-slate-900 dark:text-white tracking-tighter">
-          <span className="text-emerald-500 dark:text-emerald-400 mr-1 text-4xl align-top">{prefix}</span>
+          <span className={`${colors.text} mr-1 text-4xl align-top`}>{prefix}</span>
           <span className="counter-value" data-target={value}>0</span>
-          <span className="text-emerald-500 dark:text-emerald-400 ml-1 text-4xl align-top">{suffix}</span>
+          <span className={`${colors.text} ml-1 text-4xl align-top`}>{suffix}</span>
         </div>
-        <div className="h-px w-12 bg-linear-to-r from-transparent via-emerald-500/70 to-transparent mb-4" />
+        <div className={`h-px w-12 bg-linear-to-r from-transparent ${colors.border} to-transparent mb-4`} />
         <p className="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-widest">
           {label}
         </p>

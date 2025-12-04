@@ -93,7 +93,7 @@ export function Hero() {
           <source src="/hero.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-linear-to-b from-black/30 via-black/20 to-background/90" />
-        <div className="absolute inset-0 bg-dreem-orange/10 mix-blend-overlay" />
+        <div className="absolute inset-0 bg-gradient-to-br from-dreem-orange/20 via-kcic-green/10 to-kcic-blue/20 mix-blend-overlay" />
       </div>
 
       {/* Content */}
@@ -102,7 +102,7 @@ export function Hero() {
           {/* Main Headline */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-tight text-white drop-shadow-lg">
             Solarizing Agricultural Value Chains{' '}
-            <span className="text-dreem-orange-light block sm:inline">Across East Africa</span>
+            <span className="bg-gradient-to-r from-dreem-orange via-kcic-green to-kcic-blue bg-clip-text text-transparent block sm:inline pb-2">Across East Africa</span>
           </h1>
 
           {/* Sub-headline */}
