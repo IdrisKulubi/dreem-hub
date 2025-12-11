@@ -7,7 +7,7 @@ import {
     BookOpen,
     Image as ImageIcon,
     LogOut,
-    
+    BarChart3,
 } from 'lucide-react'
 import { logoutAction } from '@/app/actions/auth'
 
@@ -50,6 +50,12 @@ export default async function AdminLayout({
                         <Button variant="ghost" className="w-full justify-start gap-2">
                             <ImageIcon className="w-4 h-4" />
                             Gallery
+                        </Button>
+                    </Link>
+                    <Link href="/admin/dashboard/statistics">
+                        <Button variant="ghost" className="w-full justify-start gap-2">
+                            <BarChart3 className="w-4 h-4" />
+                            Statistics
                         </Button>
                     </Link>
                 </nav>

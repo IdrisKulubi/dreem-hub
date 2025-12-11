@@ -10,6 +10,7 @@ const partnerLogos: Record<string, string> = {
     'KCIC': '/images/patners/KCIC.png',
     'IKEA': '/images/patners/IKEA.png',
     'WWF': '/images/patners/WWF.png',
+    'Heifer Uganda': '/images/patners/uganda.png',
     // WWF and IKEA Foundation logos not available - will use fallback
 }
 
