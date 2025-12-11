@@ -43,10 +43,10 @@ export function Navbar() {
     return (
         <header
             className={cn(
-                'fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out',
+                'fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out bg-white dark:bg-slate-950',
                 isScrolled
-                    ? 'bg-white/90 backdrop-blur-md shadow-sm py-3 dark:bg-slate-950/90'
-                    : 'bg-transparent py-5'
+                    ? 'shadow-sm py-2'
+                    : 'py-2'
             )}
         >
             <div className="container px-4 sm:px-6 flex items-center justify-between">
@@ -69,24 +69,12 @@ export function Navbar() {
                         <Link
                             key={item.name}
                             href={item.href}
-                            className={cn(
-                                'text-sm font-medium transition-colors hover:text-dreem-orange',
-                                isScrolled
-                                    ? 'text-slate-700 dark:text-slate-200'
-                                    : 'text-white/90 hover:text-white'
-                            )}
+                            className="text-sm font-medium transition-colors text-slate-700 dark:text-slate-200 hover:text-dreem-orange"
                         >
                             {item.name}
                         </Link>
                     ))}
-                    <Button
-                        className={cn(
-                            "transition-all",
-                            isScrolled
-                                ? "bg-dreem-orange hover:bg-dreem-orange-dark text-white"
-                                : "bg-white text-dreem-orange hover:bg-white/90"
-                        )}
-                    >
+                    <Button className="bg-dreem-orange hover:bg-dreem-orange/90 text-white transition-all">
                         Get Involved
                     </Button>
                 </nav>
@@ -94,9 +82,7 @@ export function Navbar() {
                 {/* Mobile Menu */}
                 <Sheet>
                     <SheetTrigger asChild className="md:hidden">
-                        <Button variant="ghost" size="icon" className={cn(
-                            isScrolled ? "text-slate-900 dark:text-white" : "text-white hover:bg-white/10 hover:text-white"
-                        )}>
+                        <Button variant="ghost" size="icon" className="text-slate-900 dark:text-white">
                             <Menu className="h-6 w-6" />
                             <span className="sr-only">Toggle menu</span>
                         </Button>

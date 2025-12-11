@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react'
 import { homeContent } from '@/data/home-content'
-import { Network, Share2, Sprout } from 'lucide-react'
+import { NetworkIcon, ShareNetworkIcon, PlantIcon } from '@phosphor-icons/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -51,7 +51,7 @@ export function TheModel() {
         return () => ctx.revert()
     }, [])
 
-    const icons = [Network, Share2, Sprout]
+    const icons = [NetworkIcon, ShareNetworkIcon, PlantIcon]
 
     return (
         <section ref={sectionRef} className="relative py-32 overflow-hidden bg-slate-50 dark:bg-slate-950">
@@ -113,7 +113,7 @@ export function TheModel() {
 
                                 <div className="relative z-10">
                                     <div className={`w-16 h-16 rounded-2xl bg-white dark:bg-slate-800 shadow-lg shadow-slate-200/50 dark:shadow-none flex items-center justify-center mb-8 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 ${colors.iconBg}`}>
-                                        <Icon className={`w-8 h-8 ${colors.text}`} strokeWidth={1.5} />
+                                        <Icon  />
                                     </div>
 
                                     <h3 className={`text-2xl font-bold mb-4 text-slate-900 dark:text-white group-hover:${colors.text} transition-colors duration-300`}>

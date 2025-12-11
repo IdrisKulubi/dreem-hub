@@ -34,11 +34,11 @@ export function RegionalFocus() {
     const getRegionColor = (id: string) => {
         switch (id) {
             case 'kenya': return {
-                active: 'data-[state=active]:bg-dreem-orange',
-                text: 'text-dreem-orange',
-                bg: 'bg-dreem-orange/10',
-                border: 'border-dreem-orange/20',
-                gradient: 'from-dreem-orange to-amber-500'
+                active: 'data-[state=active]:bg-kcic-blue',
+               text: 'text-kcic-blue',
+                bg: 'bg-kcic-blue/10',
+                border: 'border-kcic-blue/20',
+                gradient: 'from-kcic-blue to-cyan-500'
             }
             case 'uganda': return {
                 active: 'data-[state=active]:bg-kcic-green',
@@ -166,9 +166,6 @@ export function RegionalFocus() {
                                                     <div className={`h-1 w-full bg-linear-to-r ${colors.gradient}`} />
                                                     <CardContent className="p-6">
                                                         <div className="flex items-start justify-between mb-4">
-                                                            <div className="p-2 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-500">
-                                                                <AlertTriangle className="w-5 h-5" />
-                                                            </div>
                                                             <span className="text-xs font-medium text-muted-foreground bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">
                                                                 Challenge {idx + 1}
                                                             </span>

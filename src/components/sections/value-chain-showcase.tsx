@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { homeContent } from '@/data/home-content'
 import { RevealHeading } from '@/components/ui/reveal-heading'
-import { Milk, Sprout, Fish, Zap } from 'lucide-react'
+import { DropIcon, PlantIcon, FishSimpleIcon, LightningIcon } from '@phosphor-icons/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -41,9 +41,9 @@ export function ValueChainShowcase() {
     }, [])
 
     const icons = {
-        dairy: Milk,
-        horticulture: Sprout,
-        fisheries: Fish
+        dairy: DropIcon,
+        horticulture: PlantIcon,
+        fisheries: FishSimpleIcon
     }
 
     const images = {
@@ -77,7 +77,7 @@ export function ValueChainShowcase() {
                     {homeContent.valueChains && homeContent.valueChains.length > 0 ? (
                         homeContent.valueChains.map((vc) => {
                             // @ts-expect-error - Dynamic icon mapping
-                            const Icon = icons[vc.id] || Zap
+                            const Icon = icons[vc.id] || Lightning
                             // @ts-expect-error - Dynamic image mapping
                             const imageSrc = images[vc.id] || '/images/dairy_solar.png'
 
@@ -139,7 +139,7 @@ export function ValueChainShowcase() {
                                     <div className="relative z-10 p-6 flex flex-col grow">
                                         {/* Icon */}
                                         <div className="w-16 h-16 rounded-2xl bg-white dark:bg-slate-800 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-500 shadow-lg border-4 border-white dark:border-slate-900 -mt-14 relative shrink-0">
-                                            <Icon className={`w-8 h-8 ${colors.icon} transition-colors duration-300`} />
+                                            <Icon className={`w-8 h-8 ${colors.icon} transition-colors duration-300`} weight="fill" />
                                         </div>
 
                                         {/* Title */}
