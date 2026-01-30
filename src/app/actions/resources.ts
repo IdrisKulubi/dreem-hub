@@ -62,3 +62,24 @@ export async function deleteResource(id: string) {
     revalidatePath('/knowledge-hub')
     revalidatePath('/admin/dashboard/resources')
 }
+
+export async function updateResource(id: string, data: {
+    title: string
+    description: string
+    category: 'Report' | 'Case Study' | 'Policy' | 'Manual' | 'Other'
+}) {
+    const session = await getSession()
+    if (!session) throw new Error('Unauthorized')
+
+    await db.update(resources)
+        .set({
+            title: data.title,
+            description: data.description,
+            category: data.category,
+            updatedAt: new Date(),
+        })
+        .where(eq(resources.id, id))
+
+    revalidatePath('/knowledge-hub')
+    revalidatePath('/admin/dashboard/resources')
+}
