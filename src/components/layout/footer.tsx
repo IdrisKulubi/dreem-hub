@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Facebook, Linkedin, Twitter, Mail, MapPin } from 'lucide-react'
+import { Instagram, Youtube, Link2, Mail, MapPin } from 'lucide-react'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -31,31 +31,31 @@ export function Footer() {
             {/* Social Media */}
             <div className="flex gap-3 pt-2">
               <a
-                href="https://linkedin.com"
+                href="https://www.instagram.com/kenya.cic"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group p-2.5 rounded-lg bg-white/75 dark:bg-slate-800/50 hover:bg-dreem-orange/10 border border-white/70 dark:border-slate-700/50 hover:border-dreem-orange/50 transition-all duration-300"
-                aria-label="Visit our LinkedIn page"
+                aria-label="Visit KCIC on Instagram"
               >
-                <Linkedin className="h-5 w-5 text-slate-600 dark:text-slate-400 group-hover:text-dreem-orange transition-colors duration-300" aria-hidden="true" />
+                <Instagram className="h-5 w-5 text-slate-600 dark:text-slate-400 group-hover:text-dreem-orange transition-colors duration-300" aria-hidden="true" />
               </a>
               <a
-                href="https://twitter.com"
+                href="https://www.youtube.com/@KenyaClimateInnovationCenter"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group p-2.5 rounded-lg bg-white/75 dark:bg-slate-800/50 hover:bg-dreem-orange/10 border border-white/70 dark:border-slate-700/50 hover:border-dreem-orange/50 transition-all duration-300"
-                aria-label="Visit our Twitter page"
+                aria-label="Visit KCIC on YouTube"
               >
-                <Twitter className="h-5 w-5 text-slate-600 dark:text-slate-400 group-hover:text-dreem-orange transition-colors duration-300" aria-hidden="true" />
+                <Youtube className="h-5 w-5 text-slate-600 dark:text-slate-400 group-hover:text-dreem-orange transition-colors duration-300" aria-hidden="true" />
               </a>
               <a
-                href="https://facebook.com"
+                href="https://www.tiktok.com/@kenya.cic"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group p-2.5 rounded-lg bg-white/75 dark:bg-slate-800/50 hover:bg-dreem-orange/10 border border-white/70 dark:border-slate-700/50 hover:border-dreem-orange/50 transition-all duration-300"
-                aria-label="Visit our Facebook page"
+                aria-label="Visit KCIC on TikTok"
               >
-                <Facebook className="h-5 w-5 text-slate-600 dark:text-slate-400 group-hover:text-dreem-orange transition-colors duration-300" aria-hidden="true" />
+                <Link2 className="h-5 w-5 text-slate-600 dark:text-slate-400 group-hover:text-dreem-orange transition-colors duration-300" aria-hidden="true" />
               </a>
             </div>
           </div>
@@ -106,20 +106,7 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Newsletter/CTA */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wider">Stay Updated</h3>
-            <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-              Get the latest news on solar energy adoption in East African agriculture.
-            </p>
-            <a
-              href="mailto:info@dreemhub.org?subject=Subscribe to DREEM Hub Newsletter"
-              className="inline-flex items-center gap-2 px-4 py-2.5 bg-dreem-orange/10 hover:bg-dreem-orange text-slate-700 dark:text-slate-200 hover:text-white rounded-lg border border-dreem-orange/40 hover:border-dreem-orange transition-all duration-300 text-sm font-medium group"
-            >
-              <Mail className="h-4 w-4 group-hover:scale-110 transition-transform duration-300" />
-              Subscribe
-            </a>
-          </div>
+         
         </div>
 
         {/* Bottom Bar */}

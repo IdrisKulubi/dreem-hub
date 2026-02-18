@@ -1,4 +1,4 @@
-import { Mail, MapPin, Linkedin, Twitter, Facebook } from 'lucide-react'
+import { Mail, MapPin, Instagram, Youtube, Link2 } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Footer } from '@/components/layout/footer'
 
@@ -94,31 +94,31 @@ export default function ContactPage() {
             {/* Social Links */}
             <div className="flex justify-center gap-4">
               <a
-                href="https://linkedin.com"
+                href="https://www.instagram.com/kenya.cic"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group p-4 rounded-xl bg-white dark:bg-slate-800 hover:bg-kcic-blue/10 border border-slate-200 dark:border-slate-700 hover:border-kcic-blue/50 transition-all duration-300 shadow-sm hover:shadow-md"
-                aria-label="Visit our LinkedIn page"
+                aria-label="Visit KCIC on Instagram"
               >
-                <Linkedin className="h-6 w-6 text-slate-600 dark:text-slate-400 group-hover:text-kcic-blue transition-colors duration-300" aria-hidden="true" />
+                <Instagram className="h-6 w-6 text-slate-600 dark:text-slate-400 group-hover:text-kcic-blue transition-colors duration-300" aria-hidden="true" />
               </a>
               <a
-                href="https://twitter.com"
+                href="https://www.youtube.com/@KenyaClimateInnovationCenter"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group p-4 rounded-xl bg-white dark:bg-slate-800 hover:bg-dreem-orange/10 border border-slate-200 dark:border-slate-700 hover:border-dreem-orange/50 transition-all duration-300 shadow-sm hover:shadow-md"
-                aria-label="Visit our Twitter page"
+                aria-label="Visit KCIC on YouTube"
               >
-                <Twitter className="h-6 w-6 text-slate-600 dark:text-slate-400 group-hover:text-dreem-orange transition-colors duration-300" aria-hidden="true" />
+                <Youtube className="h-6 w-6 text-slate-600 dark:text-slate-400 group-hover:text-dreem-orange transition-colors duration-300" aria-hidden="true" />
               </a>
               <a
-                href="https://facebook.com"
+                href="https://www.tiktok.com/@kenya.cic"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group p-4 rounded-xl bg-white dark:bg-slate-800 hover:bg-kcic-green/10 border border-slate-200 dark:border-slate-700 hover:border-kcic-green/50 transition-all duration-300 shadow-sm hover:shadow-md"
-                aria-label="Visit our Facebook page"
+                aria-label="Visit KCIC on TikTok"
               >
-                <Facebook className="h-6 w-6 text-slate-600 dark:text-slate-400 group-hover:text-kcic-green transition-colors duration-300" aria-hidden="true" />
+                <Link2 className="h-6 w-6 text-slate-600 dark:text-slate-400 group-hover:text-kcic-green transition-colors duration-300" aria-hidden="true" />
               </a>
             </div>
           </div>
