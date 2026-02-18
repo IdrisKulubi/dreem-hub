@@ -1,12 +1,13 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Instagram, Youtube, Link2, Mail, MapPin } from 'lucide-react'
+import { Mail, MapPin } from 'lucide-react'
+import { InstagramLogoIcon, YoutubeLogoIcon, TiktokLogoIcon } from '@phosphor-icons/react'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="relative bg-gradient-to-b from-white to-slate-300 dark:from-slate-950 dark:to-black text-slate-600 dark:text-slate-100" role="contentinfo">
+    <footer className="relative bg-linear-to-b from-white to-slate-300 dark:from-slate-950 dark:to-black text-slate-600 dark:text-slate-100" role="contentinfo">
 
       <div className="relative container py-16 md:py-20 lg:py-24">
         {/* Main Footer Content */}
@@ -37,7 +38,7 @@ export function Footer() {
                 className="group p-2.5 rounded-lg bg-white/75 dark:bg-slate-800/50 hover:bg-dreem-orange/10 border border-white/70 dark:border-slate-700/50 hover:border-dreem-orange/50 transition-all duration-300"
                 aria-label="Visit KCIC on Instagram"
               >
-                <Instagram className="h-5 w-5 text-slate-600 dark:text-slate-400 group-hover:text-dreem-orange transition-colors duration-300" aria-hidden="true" />
+                <InstagramLogoIcon className="h-5 w-5 text-slate-600 dark:text-slate-400 group-hover:text-dreem-orange transition-colors duration-300" aria-hidden="true" />
               </a>
               <a
                 href="https://www.youtube.com/@KenyaClimateInnovationCenter"
@@ -46,7 +47,7 @@ export function Footer() {
                 className="group p-2.5 rounded-lg bg-white/75 dark:bg-slate-800/50 hover:bg-dreem-orange/10 border border-white/70 dark:border-slate-700/50 hover:border-dreem-orange/50 transition-all duration-300"
                 aria-label="Visit KCIC on YouTube"
               >
-                <Youtube className="h-5 w-5 text-slate-600 dark:text-slate-400 group-hover:text-dreem-orange transition-colors duration-300" aria-hidden="true" />
+                <YoutubeLogoIcon className="h-5 w-5 text-slate-600 dark:text-slate-400 group-hover:text-dreem-orange transition-colors duration-300" aria-hidden="true" />
               </a>
               <a
                 href="https://www.tiktok.com/@kenya.cic"
@@ -55,7 +56,7 @@ export function Footer() {
                 className="group p-2.5 rounded-lg bg-white/75 dark:bg-slate-800/50 hover:bg-dreem-orange/10 border border-white/70 dark:border-slate-700/50 hover:border-dreem-orange/50 transition-all duration-300"
                 aria-label="Visit KCIC on TikTok"
               >
-                <Link2 className="h-5 w-5 text-slate-600 dark:text-slate-400 group-hover:text-dreem-orange transition-colors duration-300" aria-hidden="true" />
+                <TiktokLogoIcon className="h-5 w-5 text-slate-600 dark:text-slate-400 group-hover:text-dreem-orange transition-colors duration-300" aria-hidden="true" />
               </a>
             </div>
           </div>
