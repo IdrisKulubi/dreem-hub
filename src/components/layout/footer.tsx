@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Mail, MapPin } from 'lucide-react'
-import { InstagramLogoIcon, YoutubeLogoIcon, TiktokLogoIcon } from '@phosphor-icons/react'
+import { InstagramLogoIcon, YoutubeLogoIcon, TiktokLogoIcon } from '@phosphor-icons/react/dist/ssr'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()

@@ -1,5 +1,5 @@
 import { Mail, MapPin } from 'lucide-react'
-import { InstagramLogoIcon, YoutubeLogoIcon, TiktokLogoIcon } from '@phosphor-icons/react'
+import { InstagramLogoIcon, YoutubeLogoIcon, TiktokLogoIcon } from '@phosphor-icons/react/dist/ssr'
 import { Card, CardContent } from '@/components/ui/card'
 import { Footer } from '@/components/layout/footer'
 
