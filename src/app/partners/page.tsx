@@ -64,6 +64,14 @@ export default function PartnersPage() {
         'WWF Tanzania coordinates the DREEM Hub in Tanzania, focusing on sustainable fisheries through solar adoption in the Mafia Island Dagaa value chain, replacing fossil fuel-based systems with clean energy solutions.',
       focus: ['Fisheries', 'Marine Conservation', 'Sustainable Energy'],
     },
+    {
+      name: 'Heifer International',
+      role: 'Hub Host - Uganda',
+      logo: '/images/patners/heifer.png',
+      description:
+        'Heifer International coordinates the DREEM Hub in Uganda, focusing on integrating renewable energy solutions into agricultural practices. They support smallholder farmers and dairy cooperatives in adopting solar energy for milk cooling and other productive uses.',
+      focus: ['Dairy Value Chain', 'Solar Energy Adoption', 'Sustainable Financing'],
+    },
 
   ]
 
