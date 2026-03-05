@@ -22,7 +22,7 @@ export default async function KnowledgeHubPage({
                         Knowledge <span className="text-dreem-orange">Hub</span>
                     </h1>
                     <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-                        Access our library of reports, case studies, and policy documents driving the renewable energy transition in East Africa.
+                        Access our library of articles, reports, case studies, and policy documents driving the renewable energy transition in East Africa.
                     </p>
                 </RevealHeading>
 

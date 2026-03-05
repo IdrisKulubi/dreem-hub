@@ -1,8 +1,8 @@
-import { pgTable,  text, timestamp, uuid, pgEnum } from 'drizzle-orm/pg-core';
+import { pgTable, text, timestamp, uuid, pgEnum } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
 export const countryEnum = pgEnum('country', ['Kenya', 'Uganda', 'Tanzania', 'Global']);
-export const categoryEnum = pgEnum('category', ['Report', 'Case Study', 'Policy', 'Manual', 'Other']);
+export const categoryEnum = pgEnum('category', ['Article', 'Report', 'Case Study', 'Policy', 'Manual', 'Other']);
 
 export const resources = pgTable('resources', {
     id: uuid('id').defaultRandom().primaryKey(),

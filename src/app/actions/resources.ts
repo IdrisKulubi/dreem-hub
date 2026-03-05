@@ -10,7 +10,7 @@ import db from '../../../db/drizzle'
 export async function createResource(data: {
     title: string
     description: string
-    category: 'Report' | 'Case Study' | 'Policy' | 'Manual' | 'Other'
+    category: 'Article' | 'Report' | 'Case Study' | 'Policy' | 'Manual' | 'Other'
     fileUrl: string
     fileSize: string
 }) {
@@ -66,7 +66,7 @@ export async function deleteResource(id: string) {
 export async function updateResource(id: string, data: {
     title: string
     description: string
-    category: 'Report' | 'Case Study' | 'Policy' | 'Manual' | 'Other'
+    category: 'Article' | 'Report' | 'Case Study' | 'Policy' | 'Manual' | 'Other'
 }) {
     const session = await getSession()
     if (!session) throw new Error('Unauthorized')

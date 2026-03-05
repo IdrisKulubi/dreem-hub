@@ -49,11 +49,11 @@ export function ResourceForm() {
             <form id="resource-form" action={handleSubmit} className="space-y-5">
                 <div className="space-y-2">
                     <Label htmlFor="title" className="text-sm font-medium">Title</Label>
-                    <Input 
-                        id="title" 
-                        name="title" 
-                        required 
-                        placeholder="e.g. Annual Report 2024" 
+                    <Input
+                        id="title"
+                        name="title"
+                        required
+                        placeholder="e.g. Annual Report 2024"
                         className="h-11"
                     />
                 </div>
@@ -65,6 +65,7 @@ export function ResourceForm() {
                             <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
+                            <SelectItem value="Article">Article</SelectItem>
                             <SelectItem value="Report">Report</SelectItem>
                             <SelectItem value="Case Study">Case Study</SelectItem>
                             <SelectItem value="Policy">Policy</SelectItem>
@@ -78,10 +79,10 @@ export function ResourceForm() {
                     <Label htmlFor="description" className="text-sm font-medium">
                         Description <span className="text-xs text-slate-500">(Optional)</span>
                     </Label>
-                    <Textarea 
-                        id="description" 
-                        name="description" 
-                        placeholder="Brief description of the resource..." 
+                    <Textarea
+                        id="description"
+                        name="description"
+                        placeholder="Brief description of the resource..."
                         rows={4}
                     />
                 </div>
@@ -130,9 +131,9 @@ export function ResourceForm() {
                                     </div>
                                 </div>
                             </div>
-                            <Button 
-                                variant="ghost" 
-                                size="icon" 
+                            <Button
+                                variant="ghost"
+                                size="icon"
                                 onClick={() => setFile(null)}
                                 className="h-8 w-8"
                             >
@@ -142,9 +143,9 @@ export function ResourceForm() {
                     )}
                 </div>
 
-                <Button 
-                    type="submit" 
-                    className="w-full h-11 bg-dreem-orange hover:bg-dreem-orange/90 text-white font-medium" 
+                <Button
+                    type="submit"
+                    className="w-full h-11 bg-dreem-orange hover:bg-dreem-orange/90 text-white font-medium"
                     disabled={isSubmitting || !file}
                 >
                     {isSubmitting ? (

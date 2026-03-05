@@ -86,14 +86,14 @@ export function ResourceCard({ resource }: { resource: Resource }) {
                     )}
                 </div>
             </div>
-            
+
             <div className="flex items-center gap-2 ml-4">
                 <a href={resource.fileUrl} target="_blank" rel="noopener noreferrer">
                     <Button variant="outline" size="icon" className="h-9 w-9">
                         <Download className="w-4 h-4" />
                     </Button>
                 </a>
-                
+
                 <Dialog open={isEditOpen} onOpenChange={setIsEditOpen}>
                     <DialogTrigger asChild>
                         <Button variant="outline" size="icon" className="h-9 w-9">
@@ -107,11 +107,11 @@ export function ResourceCard({ resource }: { resource: Resource }) {
                         <form action={handleUpdate} className="space-y-4 mt-4">
                             <div className="space-y-2">
                                 <Label htmlFor="edit-title">Title</Label>
-                                <Input 
-                                    id="edit-title" 
-                                    name="title" 
-                                    defaultValue={resource.title} 
-                                    required 
+                                <Input
+                                    id="edit-title"
+                                    name="title"
+                                    defaultValue={resource.title}
+                                    required
                                 />
                             </div>
                             <div className="space-y-2">
@@ -121,6 +121,7 @@ export function ResourceCard({ resource }: { resource: Resource }) {
                                         <SelectValue />
                                     </SelectTrigger>
                                     <SelectContent>
+                                        <SelectItem value="Article">Article</SelectItem>
                                         <SelectItem value="Report">Report</SelectItem>
                                         <SelectItem value="Case Study">Case Study</SelectItem>
                                         <SelectItem value="Policy">Policy</SelectItem>
@@ -131,10 +132,10 @@ export function ResourceCard({ resource }: { resource: Resource }) {
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="edit-description">Description</Label>
-                                <Textarea 
-                                    id="edit-description" 
-                                    name="description" 
-                                    defaultValue={resource.description || ''} 
+                                <Textarea
+                                    id="edit-description"
+                                    name="description"
+                                    defaultValue={resource.description || ''}
                                     rows={4}
                                 />
                             </div>
@@ -152,8 +153,8 @@ export function ResourceCard({ resource }: { resource: Resource }) {
 
                 <Dialog open={isDeleteOpen} onOpenChange={setIsDeleteOpen}>
                     <DialogTrigger asChild>
-                        <Button 
-                            variant="outline" 
+                        <Button
+                            variant="outline"
                             size="icon"
                             className="h-9 w-9 text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950"
                         >
@@ -194,16 +195,16 @@ export function ResourceCard({ resource }: { resource: Resource }) {
                             </div>
                         </div>
                         <DialogFooter className="flex-row gap-2 sm:gap-2">
-                            <Button 
-                                type="button" 
-                                variant="outline" 
+                            <Button
+                                type="button"
+                                variant="outline"
                                 onClick={() => setIsDeleteOpen(false)}
                                 disabled={isDeleting}
                                 className="flex-1"
                             >
                                 Cancel
                             </Button>
-                            <Button 
+                            <Button
                                 type="button"
                                 variant="destructive"
                                 onClick={handleDelete}
