@@ -7,31 +7,50 @@ import { desc, eq } from 'drizzle-orm'
 import db from '../../../db/drizzle'
 import { galleryImages, galleryEvents } from '../../../db/schema'
 
+type GalleryMediaType = 'image' | 'video'
+type GalleryMediaInput = {
+    url: string
+    type: GalleryMediaType
+    title?: string
+}
+const countries = ['Kenya', 'Uganda', 'Tanzania', 'Global'] as const
+type GalleryCountry = typeof countries[number]
+
+function isGalleryCountry(country: string): country is GalleryCountry {
+    return countries.includes(country as GalleryCountry)
+}
+
 // Event actions
 export async function createEvent(data: {
     title: string
     description?: string
-    imageUrls: string[]
+    imageUrls?: string[]
+    media?: GalleryMediaInput[]
 }) {
     const session = await getSession()
     if (!session) throw new Error('Unauthorized')
 
     const country = session as 'Kenya' | 'Uganda' | 'Tanzania' | 'Global'
+    const media: GalleryMediaInput[] =
+        data.media ?? data.imageUrls?.map((url) => ({ url, type: 'image' as const })) ?? []
 
-    if (data.imageUrls.length === 0) throw new Error('At least one image is required')
+    if (media.length === 0) throw new Error('At least one media item is required')
 
     const [event] = await db.insert(galleryEvents).values({
         title: data.title,
         description: data.description,
         country: country,
-        coverImageUrl: data.imageUrls[0], // First image is the cover
+        coverImageUrl: media[0].url, // First media item is the cover
+        coverMediaType: media[0].type,
     }).returning()
 
-    // Insert all images linked to this event
+    // Insert all media linked to this event
     await db.insert(galleryImages).values(
-        data.imageUrls.map((url) => ({
+        media.map((item) => ({
             eventId: event.id,
-            imageUrl: url,
+            imageUrl: item.url,
+            mediaType: item.type,
+            title: item.title,
             country: country,
         }))
     )
@@ -41,9 +60,9 @@ export async function createEvent(data: {
 }
 
 export async function getEvents(country?: string) {
-    if (country && country !== 'All') {
+    if (country && country !== 'All' && isGalleryCountry(country)) {
         return await db.query.galleryEvents.findMany({
-            where: eq(galleryEvents.country, country as any),
+            where: eq(galleryEvents.country, country),
             orderBy: [desc(galleryEvents.createdAt)],
             with: {
                 images: true,
@@ -92,16 +111,15 @@ export async function updateEvent(id: string, data: {
 export async function createImage(data: {
     title: string
     imageUrl: string
+    mediaType?: GalleryMediaType
 }) {
     const session = await getSession()
     if (!session) throw new Error('Unauthorized')
 
-    const country = session as 'Kenya' | 'Uganda' | 'Tanzania' | 'Global'
-
-    // Create a single-image event
+    // Create a single-media event
     await createEvent({
         title: data.title,
-        imageUrls: [data.imageUrl],
+        media: [{ url: data.imageUrl, type: data.mediaType ?? 'image', title: data.title }],
     })
 
     revalidatePath('/gallery')

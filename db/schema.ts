@@ -3,6 +3,7 @@ import { relations } from 'drizzle-orm';
 
 export const countryEnum = pgEnum('country', ['Kenya', 'Uganda', 'Tanzania', 'Global']);
 export const categoryEnum = pgEnum('category', ['Article', 'Report', 'Case Study', 'Policy', 'Manual', 'Other']);
+export const mediaTypeEnum = pgEnum('media_type', ['image', 'video']);
 
 export const resources = pgTable('resources', {
     id: uuid('id').defaultRandom().primaryKey(),
@@ -22,6 +23,7 @@ export const galleryEvents = pgTable('gallery_events', {
     description: text('description'),
     country: countryEnum('country').default('Global').notNull(),
     coverImageUrl: text('cover_image_url').notNull(),
+    coverMediaType: mediaTypeEnum('cover_media_type').default('image').notNull(),
     createdAt: timestamp('created_at').defaultNow().notNull(),
     updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
@@ -32,6 +34,7 @@ export const galleryImages = pgTable('gallery_images', {
     title: text('title'),
     country: countryEnum('country').default('Global').notNull(),
     imageUrl: text('image_url').notNull(),
+    mediaType: mediaTypeEnum('media_type').default('image').notNull(),
     createdAt: timestamp('created_at').defaultNow().notNull(),
 });
 

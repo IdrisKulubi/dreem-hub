@@ -1,5 +1,5 @@
 import { getSession } from '@/app/actions/auth'
-import { getEvents, deleteEvent } from '@/app/actions/gallery'
+import { getEvents } from '@/app/actions/gallery'
 import { GalleryForm } from './gallery-form'
 import { GalleryEventCard } from './event-card'
 
@@ -12,7 +12,7 @@ export default async function GalleryPage() {
             <div className="bg-gradient-to-r from-dreem-orange/10 to-transparent p-6 rounded-xl border border-dreem-orange/20">
                 <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Gallery Manager</h1>
                 <p className="text-slate-600 dark:text-slate-400 mt-2">
-                    Upload and manage photos for {session}. Organize images by events or upload individual photos.
+                    Upload and manage photos and videos for {session}. Organize media by events or upload individual highlights.
                 </p>
             </div>
 
@@ -28,7 +28,7 @@ export default async function GalleryPage() {
                     {events.length === 0 ? (
                         <div className="text-center py-20 border-2 border-dashed rounded-xl text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-900/50">
                             <p className="text-lg font-medium">No events found</p>
-                            <p className="text-sm mt-1">Upload your first image or create an event!</p>
+                            <p className="text-sm mt-1">Upload your first media item or create an event.</p>
                         </div>
                     ) : (
                         <div className="grid gap-4">

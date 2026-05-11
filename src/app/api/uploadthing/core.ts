@@ -7,7 +7,7 @@ export const ourFileRouter = {
     // Define as many FileRoutes as you like, each with a unique routeSlug
     imageUploader: f({ image: { maxFileSize: "4MB" } })
         // Set permissions and file types for this FileRoute
-        .middleware(async ({ req }) => {
+        .middleware(async () => {
             // This code runs on your server before upload
             // TODO: Add auth check here later
             return { userId: "admin" };
@@ -19,8 +19,21 @@ export const ourFileRouter = {
             return { uploadedBy: metadata.userId };
         }),
 
+    galleryMediaUploader: f({
+        image: { maxFileSize: "4MB", maxFileCount: 10 },
+        video: { maxFileSize: "64MB", maxFileCount: 4 },
+    })
+        .middleware(async () => {
+            // TODO: Add auth check here later
+            return { userId: "admin" };
+        })
+        .onUploadComplete(async ({ metadata, file }) => {
+            console.log("Gallery media upload complete:", file.ufsUrl);
+            return { uploadedBy: metadata.userId };
+        }),
+
     resourceUploader: f({ pdf: { maxFileSize: "16MB", maxFileCount: 1 } })
-        .middleware(async ({ req }) => {
+        .middleware(async () => {
             // TODO: Add auth check here later
             return { userId: "admin" };
         })

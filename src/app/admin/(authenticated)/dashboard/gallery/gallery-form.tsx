@@ -9,19 +9,29 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { toast } from 'sonner'
-import { Loader2, Image as ImageIcon, X, FolderOpen } from 'lucide-react'
+import { Loader2, Image as ImageIcon, X, FolderOpen, Video } from 'lucide-react'
 import Image from 'next/image'
 
 type UploadMode = 'single' | 'event'
+type GalleryMediaType = 'image' | 'video'
+type GalleryFile = { url: string, name: string, type: GalleryMediaType }
+
+function getMediaType(file: { type?: string, name: string }): GalleryMediaType {
+    if (file.type?.startsWith('video/') || /\.(mp4|mov|webm|m4v)$/i.test(file.name)) {
+        return 'video'
+    }
+
+    return 'image'
+}
 
 export function GalleryForm() {
     const [mode, setMode] = useState<UploadMode>('single')
-    const [files, setFiles] = useState<{ url: string, name: string }[]>([])
+    const [files, setFiles] = useState<GalleryFile[]>([])
     const [isSubmitting, setIsSubmitting] = useState(false)
 
     async function handleSubmit(formData: FormData) {
         if (files.length === 0) {
-            toast.error('Please upload at least one image')
+            toast.error('Please upload at least one photo or video')
             return
         }
 
@@ -31,21 +41,26 @@ export function GalleryForm() {
                 await createImage({
                     title: formData.get('title') as string,
                     imageUrl: files[0].url,
+                    mediaType: files[0].type,
                 })
-                toast.success('Image added to gallery')
+                toast.success('Media item added to gallery')
             } else {
                 await createEvent({
                     title: formData.get('title') as string,
                     description: formData.get('description') as string,
-                    imageUrls: files.map(f => f.url),
+                    media: files.map(f => ({
+                        url: f.url,
+                        type: f.type,
+                        title: f.name,
+                    })),
                 })
-                toast.success('Event created with ' + files.length + ' images')
+                toast.success('Event created with ' + files.length + ' media items')
             }
             
             setFiles([])
             const form = document.getElementById('gallery-form') as HTMLFormElement
             form?.reset()
-        } catch (error) {
+        } catch {
             toast.error('Failed to upload')
         } finally {
             setIsSubmitting(false)
@@ -74,7 +89,7 @@ export function GalleryForm() {
                             <RadioGroupItem value="single" id="single" />
                             <div className="flex items-center gap-2">
                                 <ImageIcon className="w-4 h-4" />
-                                <span className="text-sm font-medium">Single Image</span>
+                                <span className="text-sm font-medium">Single Media</span>
                             </div>
                         </Label>
                         <Label
@@ -88,7 +103,7 @@ export function GalleryForm() {
                             <RadioGroupItem value="event" id="event" />
                             <div className="flex items-center gap-2">
                                 <FolderOpen className="w-4 h-4" />
-                                <span className="text-sm font-medium">Event/Folder</span>
+                                <span className="text-sm font-medium">Event/Album</span>
                             </div>
                         </Label>
                     </RadioGroup>
@@ -97,7 +112,7 @@ export function GalleryForm() {
                 {/* Title Field */}
                 <div className="space-y-2">
                     <Label htmlFor="title" className="text-sm font-medium">
-                        {mode === 'single' ? 'Image Title' : 'Event Name'}
+                        {mode === 'single' ? 'Media Title' : 'Event Name'}
                     </Label>
                     <Input 
                         id="title" 
@@ -124,19 +139,22 @@ export function GalleryForm() {
                 {/* Upload Area */}
                 <div className="space-y-2">
                     <Label className="text-sm font-medium">
-                        {mode === 'single' ? 'Upload Image' : 'Upload Images'}
-                        {mode === 'event' && <span className="text-xs text-muted-foreground ml-2">(First image will be the cover)</span>}
+                        {mode === 'single' ? 'Upload Photo or Video' : 'Upload Photos and Videos'}
+                        {mode === 'event' && <span className="text-xs text-muted-foreground ml-2">(First item will be the cover)</span>}
                     </Label>
                     
                     {files.length === 0 ? (
                         <div className="relative border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-lg p-8 flex flex-col items-center justify-center bg-slate-50 dark:bg-slate-800/50 hover:border-dreem-orange hover:bg-dreem-orange/5 transition-all cursor-pointer group min-h-[160px]">
-                            <ImageIcon className="w-12 h-12 text-slate-400 group-hover:text-dreem-orange transition-colors mb-3" />
+                            <div className="flex items-center gap-2 mb-3 text-slate-400 group-hover:text-dreem-orange transition-colors">
+                                <ImageIcon className="w-10 h-10" />
+                                <Video className="w-10 h-10" />
+                            </div>
                             <p className="text-sm font-medium text-slate-600 dark:text-slate-400 mb-1">
-                                {mode === 'single' ? 'Click to upload image' : 'Click to select multiple images'}
+                                {mode === 'single' ? 'Click to upload a photo or video' : 'Click to select photos and videos'}
                             </p>
-                            <p className="text-xs text-slate-500">Max 4MB per image</p>
+                            <p className="text-xs text-slate-500">Images up to 4MB, videos up to 64MB</p>
                             <UploadButton
-                                endpoint="imageUploader"
+                                endpoint="galleryMediaUploader"
                                 content={{
                                     button: () => <></>,
                                     allowedContent: () => <></>
@@ -147,14 +165,16 @@ export function GalleryForm() {
                                             setFiles([{
                                                 url: res[0].ufsUrl,
                                                 name: res[0].name,
+                                                type: getMediaType(res[0]),
                                             }])
-                                            toast.success('Image uploaded')
+                                            toast.success('Media uploaded')
                                         } else {
                                             setFiles(res.map(r => ({
                                                 url: r.ufsUrl,
                                                 name: r.name,
+                                                type: getMediaType(r),
                                             })))
-                                            toast.success(`${res.length} images uploaded`)
+                                            toast.success(`${res.length} media items uploaded`)
                                         }
                                     }
                                 }}
@@ -173,17 +193,31 @@ export function GalleryForm() {
                                 {files.map((file, index) => (
                                     <div key={index} className="relative group">
                                         <div className="relative aspect-video w-full rounded-lg overflow-hidden border-2 border-slate-200 dark:border-slate-700">
-                                            <Image
-                                                src={file.url}
-                                                alt={`Preview ${index + 1}`}
-                                                fill
-                                                className="object-cover"
-                                            />
+                                            {file.type === 'video' ? (
+                                                <video
+                                                    src={file.url}
+                                                    className="h-full w-full object-cover"
+                                                    controls
+                                                    muted
+                                                    preload="metadata"
+                                                />
+                                            ) : (
+                                                <Image
+                                                    src={file.url}
+                                                    alt={`Preview ${index + 1}`}
+                                                    fill
+                                                    className="object-cover"
+                                                    unoptimized
+                                                />
+                                            )}
                                             {mode === 'event' && index === 0 && (
                                                 <div className="absolute top-2 left-2 bg-dreem-orange text-white text-xs font-bold px-2 py-1 rounded">
                                                     COVER
                                                 </div>
                                             )}
+                                            <div className="absolute bottom-2 left-2 bg-black/70 text-white text-xs font-bold px-2 py-1 rounded uppercase">
+                                                {file.type}
+                                            </div>
                                             <Button
                                                 variant="destructive"
                                                 size="icon"
@@ -199,11 +233,11 @@ export function GalleryForm() {
                             {mode === 'event' && (
                                 <div className="relative border-2 border-dashed border-dreem-orange/50 rounded-lg p-4 bg-dreem-orange/5 hover:border-dreem-orange hover:bg-dreem-orange/10 transition-all cursor-pointer group">
                                     <p className="text-sm font-medium text-center text-slate-600 dark:text-slate-400 mb-1">
-                                        Click to add more images
+                                        Click to add more photos or videos
                                     </p>
                                     <p className="text-xs text-center text-slate-500">Select multiple files from your device</p>
                                     <UploadButton
-                                        endpoint="imageUploader"
+                                        endpoint="galleryMediaUploader"
                                         content={{
                                             button: () => <></>,
                                             allowedContent: () => <></>
@@ -213,9 +247,10 @@ export function GalleryForm() {
                                                 const newFiles = res.map(r => ({
                                                     url: r.ufsUrl,
                                                     name: r.name,
+                                                    type: getMediaType(r),
                                                 }))
                                                 setFiles([...files, ...newFiles])
-                                                toast.success(`${res.length} more images added`)
+                                                toast.success(`${res.length} more media items added`)
                                             }
                                         }}
                                         onUploadError={(error: Error) => {

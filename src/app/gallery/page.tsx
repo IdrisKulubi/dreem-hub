@@ -2,7 +2,7 @@ import { getEvents } from '@/app/actions/gallery'
 import { CountryFilter } from '@/components/ui/country-filter'
 import { RevealHeading } from '@/components/ui/reveal-heading'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import { Image as ImageIcon, Images } from 'lucide-react'
+import { Image as ImageIcon, Images, Play } from 'lucide-react'
 import Image from 'next/image'
 
 export default async function GalleryPage({
@@ -45,13 +45,30 @@ export default async function GalleryPage({
                                 <DialogTrigger asChild>
                                     <div className="group relative rounded-xl overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer">
                                         <div className="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-800">
-                                            <Image
-                                                src={event.coverImageUrl}
-                                                alt={event.title}
-                                                fill
-                                                className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                                unoptimized
-                                            />
+                                            {event.coverMediaType === 'video' ? (
+                                                <>
+                                                    <video
+                                                        src={event.coverImageUrl}
+                                                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                                        muted
+                                                        playsInline
+                                                        preload="metadata"
+                                                    />
+                                                    <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                                                        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-black/70 text-white shadow-lg">
+                                                            <Play className="h-6 w-6 fill-white" />
+                                                        </div>
+                                                    </div>
+                                                </>
+                                            ) : (
+                                                <Image
+                                                    src={event.coverImageUrl}
+                                                    alt={event.title}
+                                                    fill
+                                                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                                    unoptimized
+                                                />
+                                            )}
                                             <div className="absolute top-3 right-3 bg-black/70 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-lg">
                                                 <Images className="w-3.5 h-3.5" />
                                                 <span>{event.images?.length || 0}</span>
@@ -105,7 +122,7 @@ export default async function GalleryPage({
                                         )}
                                         <div className="flex items-center gap-2 text-sm text-slate-500">
                                             <Images className="w-4 h-4" />
-                                            <span>{event.images?.length || 0} photos in this collection</span>
+                                            <span>{event.images?.length || 0} media items in this collection</span>
                                         </div>
                                     </DialogHeader>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
@@ -114,13 +131,22 @@ export default async function GalleryPage({
                                                 key={image.id} 
                                                 className="relative aspect-square rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-800 group border border-slate-200 dark:border-slate-700"
                                             >
-                                                <Image
-                                                    src={image.imageUrl}
-                                                    alt={image.title || `${event.title} - Photo ${index + 1}`}
-                                                    fill
-                                                    className="object-cover group-hover:scale-110 transition-transform duration-500"
-                                                    unoptimized
-                                                />
+                                                {image.mediaType === 'video' ? (
+                                                    <video
+                                                        src={image.imageUrl}
+                                                        className="h-full w-full object-cover"
+                                                        controls
+                                                        preload="metadata"
+                                                    />
+                                                ) : (
+                                                    <Image
+                                                        src={image.imageUrl}
+                                                        alt={image.title || `${event.title} - Photo ${index + 1}`}
+                                                        fill
+                                                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                                                        unoptimized
+                                                    />
+                                                )}
                                                 {image.title && (
                                                     <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-3 opacity-0 group-hover:opacity-100 transition-opacity">
                                                         <p className="text-white text-xs font-medium">{image.title}</p>

@@ -7,7 +7,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
-import { Trash2, Edit, Images, Eye, AlertTriangle } from 'lucide-react'
+import { Trash2, Edit, Images, Eye, AlertTriangle, Play } from 'lucide-react'
 import Image from 'next/image'
 import { toast } from 'sonner'
 import { format } from 'date-fns'
@@ -18,11 +18,13 @@ type Event = {
     description: string | null
     country: string
     coverImageUrl: string
+    coverMediaType: 'image' | 'video'
     createdAt: Date
     updatedAt: Date
     images: Array<{
         id: string
         imageUrl: string
+        mediaType: 'image' | 'video'
         title: string | null
     }>
 }
@@ -39,7 +41,7 @@ export function GalleryEventCard({ event }: { event: Event }) {
             await deleteEvent(event.id)
             toast.success('Event deleted')
             setIsDeleteOpen(false)
-        } catch (error) {
+        } catch {
             toast.error('Failed to delete event')
         } finally {
             setIsDeleting(false)
@@ -54,7 +56,7 @@ export function GalleryEventCard({ event }: { event: Event }) {
             })
             toast.success('Event updated')
             setIsEditOpen(false)
-        } catch (error) {
+        } catch {
             toast.error('Failed to update event')
         }
     }
@@ -64,13 +66,29 @@ export function GalleryEventCard({ event }: { event: Event }) {
             <div className="flex flex-col sm:flex-row gap-4 p-4">
                 {/* Cover Image */}
                 <div className="relative w-full sm:w-48 h-48 flex-shrink-0 rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-800">
-                    <Image
-                        src={event.coverImageUrl}
-                        alt={event.title}
-                        fill
-                        className="object-cover"
-                        unoptimized
-                    />
+                    {event.coverMediaType === 'video' ? (
+                        <>
+                            <video
+                                src={event.coverImageUrl}
+                                className="h-full w-full object-cover"
+                                muted
+                                preload="metadata"
+                            />
+                            <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-black/70 text-white">
+                                    <Play className="h-5 w-5 fill-white" />
+                                </div>
+                            </div>
+                        </>
+                    ) : (
+                        <Image
+                            src={event.coverImageUrl}
+                            alt={event.title}
+                            fill
+                            className="object-cover"
+                            unoptimized
+                        />
+                    )}
                     <div className="absolute top-2 right-2 bg-black/70 text-white text-xs font-semibold px-2 py-1 rounded flex items-center gap-1">
                         <Images className="w-3 h-3" />
                         {event.images?.length || 0}
@@ -113,13 +131,22 @@ export function GalleryEventCard({ event }: { event: Event }) {
                                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4">
                                     {event.images?.map((image) => (
                                         <div key={image.id} className="relative aspect-square rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-800">
-                                            <Image
-                                                src={image.imageUrl}
-                                                alt={image.title || 'Event image'}
-                                                fill
-                                                className="object-cover"
-                                                unoptimized
-                                            />
+                                            {image.mediaType === 'video' ? (
+                                                <video
+                                                    src={image.imageUrl}
+                                                    className="h-full w-full object-cover"
+                                                    controls
+                                                    preload="metadata"
+                                                />
+                                            ) : (
+                                                <Image
+                                                    src={image.imageUrl}
+                                                    alt={image.title || 'Event image'}
+                                                    fill
+                                                    className="object-cover"
+                                                    unoptimized
+                                                />
+                                            )}
                                         </div>
                                     ))}
                                 </div>
@@ -188,7 +215,7 @@ export function GalleryEventCard({ event }: { event: Event }) {
                                 </DialogHeader>
                                 <div className="py-4">
                                     <p className="text-slate-600 dark:text-slate-400 mb-4">
-                                        Are you sure you want to delete <span className="font-semibold text-slate-900 dark:text-white">"{event.title}"</span>?
+                                        Are you sure you want to delete <span className="font-semibold text-slate-900 dark:text-white">&quot;{event.title}&quot;</span>?
                                     </p>
                                     <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3">
                                         <div className="flex items-start gap-2 text-sm text-red-800 dark:text-red-300">
@@ -196,8 +223,8 @@ export function GalleryEventCard({ event }: { event: Event }) {
                                             <div>
                                                 <p className="font-medium mb-1">This will permanently delete:</p>
                                                 <ul className="list-disc list-inside space-y-0.5 text-xs">
-                                                    <li>The event "{event.title}"</li>
-                                                    <li>All {event.images?.length || 0} images in this event</li>
+                                                    <li>The event &quot;{event.title}&quot;</li>
+                                                    <li>All {event.images?.length || 0} media items in this event</li>
                                                     <li>All associated metadata</li>
                                                 </ul>
                                             </div>
