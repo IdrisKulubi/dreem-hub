@@ -13,6 +13,7 @@ export const resources = pgTable('resources', {
     country: countryEnum('country').default('Global').notNull(),
     fileUrl: text('file_url').notNull(),
     fileSize: text('file_size'),
+    coverImageUrl: text('cover_image_url'),
     createdAt: timestamp('created_at').defaultNow().notNull(),
     updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });

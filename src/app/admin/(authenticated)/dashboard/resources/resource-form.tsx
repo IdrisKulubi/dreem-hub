@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { createResource } from '@/app/actions/resources'
+import { CoverImageUpload } from '@/components/admin/cover-image-upload'
 import { UploadButton } from '@/lib/uploadthing'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -13,10 +14,16 @@ import { Loader2, FileText, X, Upload } from 'lucide-react'
 
 export function ResourceForm() {
     const [file, setFile] = useState<{ url: string, name: string, size: number } | null>(null)
+    const [coverImage, setCoverImage] = useState<{ url: string, name: string } | null>(null)
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [category, setCategory] = useState('Report')
 
     async function handleSubmit(formData: FormData) {
+        if (!coverImage) {
+            toast.error('Please upload a cover image')
+            return
+        }
+
         if (!file) {
             toast.error('Please upload a PDF file')
             return
@@ -27,16 +34,18 @@ export function ResourceForm() {
             await createResource({
                 title: formData.get('title') as string,
                 description: formData.get('description') as string,
-                category: category as any,
+                category: category as 'Article' | 'Report' | 'Case Study' | 'Policy' | 'Manual' | 'Other',
                 fileUrl: file.url,
                 fileSize: (file.size / 1024 / 1024).toFixed(2) + ' MB',
+                coverImageUrl: coverImage.url,
             })
             toast.success('Resource published successfully')
             setFile(null)
+            setCoverImage(null)
             const form = document.getElementById('resource-form') as HTMLFormElement
             form?.reset()
             setCategory('Report')
-        } catch (error) {
+        } catch {
             toast.error('Failed to create resource')
         } finally {
             setIsSubmitting(false)
@@ -87,6 +96,12 @@ export function ResourceForm() {
                     />
                 </div>
 
+                <CoverImageUpload
+                    coverImage={coverImage}
+                    onCoverImageChange={setCoverImage}
+                    required
+                />
+
                 <div className="space-y-2">
                     <Label className="text-sm font-medium">File Upload (PDF)</Label>
                     {!file ? (
@@ -132,6 +147,7 @@ export function ResourceForm() {
                                 </div>
                             </div>
                             <Button
+                                type="button"
                                 variant="ghost"
                                 size="icon"
                                 onClick={() => setFile(null)}
@@ -146,7 +162,7 @@ export function ResourceForm() {
                 <Button
                     type="submit"
                     className="w-full h-11 bg-dreem-orange hover:bg-dreem-orange/90 text-white font-medium"
-                    disabled={isSubmitting || !file}
+                    disabled={isSubmitting || !file || !coverImage}
                 >
                     {isSubmitting ? (
                         <Loader2 className="w-4 h-4 animate-spin" />

@@ -15,6 +15,13 @@
       "when": 1778496000000,
       "tag": "0001_gallery_video_support",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1778582400000,
+      "tag": "0002_resource_cover_image",
+      "breakpoints": true
     }
   ]
 }

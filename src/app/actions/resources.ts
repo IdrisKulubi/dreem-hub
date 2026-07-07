@@ -13,6 +13,7 @@ export async function createResource(data: {
     category: 'Article' | 'Report' | 'Case Study' | 'Policy' | 'Manual' | 'Other'
     fileUrl: string
     fileSize: string
+    coverImageUrl: string
 }) {
     const session = await getSession()
     if (!session) throw new Error('Unauthorized')
@@ -34,6 +35,7 @@ export async function createResource(data: {
         country: country,
         fileUrl: data.fileUrl,
         fileSize: data.fileSize,
+        coverImageUrl: data.coverImageUrl,
     })
 
     revalidatePath('/knowledge-hub')
@@ -67,6 +69,7 @@ export async function updateResource(id: string, data: {
     title: string
     description: string
     category: 'Article' | 'Report' | 'Case Study' | 'Policy' | 'Manual' | 'Other'
+    coverImageUrl?: string | null
 }) {
     const session = await getSession()
     if (!session) throw new Error('Unauthorized')
@@ -76,6 +79,7 @@ export async function updateResource(id: string, data: {
             title: data.title,
             description: data.description,
             category: data.category,
+            ...(data.coverImageUrl !== undefined && { coverImageUrl: data.coverImageUrl }),
             updatedAt: new Date(),
         })
         .where(eq(resources.id, id))

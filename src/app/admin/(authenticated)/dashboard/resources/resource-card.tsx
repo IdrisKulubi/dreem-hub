@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { deleteResource, updateResource } from '@/app/actions/resources'
+import { CoverImageUpload } from '@/components/admin/cover-image-upload'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription, DialogFooter } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
@@ -11,6 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Trash2, FileText, Download, Edit, AlertTriangle } from 'lucide-react'
 import { format } from 'date-fns'
 import { toast } from 'sonner'
+import Image from 'next/image'
 
 type Resource = {
     id: string
@@ -20,6 +22,7 @@ type Resource = {
     country: string
     fileUrl: string
     fileSize: string | null
+    coverImageUrl: string | null
     createdAt: Date
 }
 
@@ -28,6 +31,20 @@ export function ResourceCard({ resource }: { resource: Resource }) {
     const [isDeleteOpen, setIsDeleteOpen] = useState(false)
     const [isDeleting, setIsDeleting] = useState(false)
     const [category, setCategory] = useState(resource.category)
+    const [coverImage, setCoverImage] = useState<{ url: string; name: string } | null>(
+        resource.coverImageUrl ? { url: resource.coverImageUrl, name: 'Current cover' } : null
+    )
+
+    useEffect(() => {
+        if (isEditOpen) {
+            setCategory(resource.category)
+            setCoverImage(
+                resource.coverImageUrl
+                    ? { url: resource.coverImageUrl, name: 'Current cover' }
+                    : null
+            )
+        }
+    }, [isEditOpen, resource])
 
     async function handleDelete() {
         setIsDeleting(true)
@@ -35,7 +52,7 @@ export function ResourceCard({ resource }: { resource: Resource }) {
             await deleteResource(resource.id)
             toast.success('Resource deleted')
             setIsDeleteOpen(false)
-        } catch (error) {
+        } catch {
             toast.error('Failed to delete resource')
         } finally {
             setIsDeleting(false)
@@ -47,11 +64,12 @@ export function ResourceCard({ resource }: { resource: Resource }) {
             await updateResource(resource.id, {
                 title: formData.get('title') as string,
                 description: formData.get('description') as string,
-                category: category as any,
+                category: category as 'Article' | 'Report' | 'Case Study' | 'Policy' | 'Manual' | 'Other',
+                coverImageUrl: coverImage?.url ?? null,
             })
             toast.success('Resource updated')
             setIsEditOpen(false)
-        } catch (error) {
+        } catch {
             toast.error('Failed to update resource')
         }
     }
@@ -59,9 +77,21 @@ export function ResourceCard({ resource }: { resource: Resource }) {
     return (
         <div className="flex items-start justify-between p-5 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
             <div className="flex gap-4 flex-1 min-w-0">
-                <div className="p-3 bg-dreem-orange/10 rounded-lg h-fit">
-                    <FileText className="w-6 h-6 text-dreem-orange" />
-                </div>
+                {resource.coverImageUrl ? (
+                    <div className="relative w-20 h-20 shrink-0 rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-800">
+                        <Image
+                            src={resource.coverImageUrl}
+                            alt={resource.title}
+                            fill
+                            className="object-cover"
+                            unoptimized
+                        />
+                    </div>
+                ) : (
+                    <div className="p-3 bg-dreem-orange/10 rounded-lg h-fit">
+                        <FileText className="w-6 h-6 text-dreem-orange" />
+                    </div>
+                )}
                 <div className="flex-1 min-w-0">
                     <h3 className="font-semibold text-slate-900 dark:text-white text-lg">
                         {resource.title}
@@ -76,6 +106,12 @@ export function ResourceCard({ resource }: { resource: Resource }) {
                             <>
                                 <span>•</span>
                                 <span>{resource.fileSize}</span>
+                            </>
+                        )}
+                        {!resource.coverImageUrl && (
+                            <>
+                                <span>•</span>
+                                <span className="text-amber-600 dark:text-amber-400">No cover</span>
                             </>
                         )}
                     </div>
@@ -100,7 +136,7 @@ export function ResourceCard({ resource }: { resource: Resource }) {
                             <Edit className="w-4 h-4" />
                         </Button>
                     </DialogTrigger>
-                    <DialogContent>
+                    <DialogContent className="max-h-[90vh] overflow-y-auto">
                         <DialogHeader>
                             <DialogTitle>Edit Resource</DialogTitle>
                         </DialogHeader>
@@ -139,6 +175,11 @@ export function ResourceCard({ resource }: { resource: Resource }) {
                                     rows={4}
                                 />
                             </div>
+                            <CoverImageUpload
+                                coverImage={coverImage}
+                                onCoverImageChange={setCoverImage}
+                                label="Cover Image"
+                            />
                             <div className="flex gap-2">
                                 <Button type="submit" className="flex-1 bg-dreem-orange hover:bg-dreem-orange/90">
                                     Save Changes
