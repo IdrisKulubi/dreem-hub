@@ -1,4 +1,5 @@
 import { getResources } from '@/app/actions/resources'
+import { ResourceShareButton } from '@/components/knowledge-hub/resource-share-button'
 import { CountryFilter } from '@/components/ui/country-filter'
 import { RevealHeading } from '@/components/ui/reveal-heading'
 import { FileText, Download, Calendar, Tag } from 'lucide-react'
@@ -76,11 +77,18 @@ export default async function KnowledgeHubPage({
                                         </span>
                                     </div>
 
-                                    <a href={resource.fileUrl} target="_blank" rel="noopener noreferrer">
-                                        <Button size="sm" variant="ghost" className="hover:text-dreem-orange hover:bg-dreem-orange/10 -mr-2">
-                                            Download <Download className="w-3 h-3 ml-1.5" />
-                                        </Button>
-                                    </a>
+                                    <div className="flex items-center -mr-2">
+                                        <ResourceShareButton
+                                            title={resource.title}
+                                            fileUrl={resource.fileUrl}
+                                            description={resource.description}
+                                        />
+                                        <a href={resource.fileUrl} target="_blank" rel="noopener noreferrer">
+                                            <Button size="sm" variant="ghost" className="hover:text-dreem-orange hover:bg-dreem-orange/10">
+                                                 <Download className="w-3 h-3 ml-1.5" />
+                                            </Button>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         ))}
