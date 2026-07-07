@@ -10,9 +10,24 @@
  * Images uploaded through UploadThing are automatically optimized and served via CDN
  */
 export const UPLOADTHING_CONFIG = {
-  maxFileSize: '4MB',
+  maxFileSize: '8MB',
   acceptedFileTypes: ['image/jpeg', 'image/png', 'image/webp'],
   // UploadThing automatically converts images to WebP format for optimal performance
+}
+
+export function getImageUploadErrorMessage(error: Error): string {
+  const message = error.message.toLowerCase()
+
+  if (
+    message.includes('filesizemismatch') ||
+    message.includes('file size') ||
+    message.includes('too large') ||
+    message.includes('max file size')
+  ) {
+    return 'Image is too large. Please compress it to under 8MB and try again.'
+  }
+
+  return `Upload failed: ${error.message}`
 }
 
 /**

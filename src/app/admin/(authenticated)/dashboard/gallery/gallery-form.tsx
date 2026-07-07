@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { getImageUploadErrorMessage } from '@/lib/image-utils'
 import { createEvent, createImage } from '@/app/actions/gallery'
 import { UploadButton } from '@/lib/uploadthing'
 import { Button } from '@/components/ui/button'
@@ -152,7 +153,10 @@ export function GalleryForm() {
                             <p className="text-sm font-medium text-slate-600 dark:text-slate-400 mb-1">
                                 {mode === 'single' ? 'Click to upload a photo or video' : 'Click to select photos and videos'}
                             </p>
-                            <p className="text-xs text-slate-500">Images up to 4MB, videos up to 64MB</p>
+                            <p className="text-xs text-slate-500">Images up to 8MB, videos up to 64MB</p>
+                            <p className="text-xs text-slate-400 mt-2 text-center max-w-sm">
+                                Compress large images to under 8MB before uploading.
+                            </p>
                             <UploadButton
                                 endpoint="galleryMediaUploader"
                                 content={{
@@ -179,7 +183,7 @@ export function GalleryForm() {
                                     }
                                 }}
                                 onUploadError={(error: Error) => {
-                                    toast.error(`Upload failed: ${error.message}`)
+                                    toast.error(getImageUploadErrorMessage(error))
                                 }}
                                 appearance={{
                                     button: "w-full h-full absolute inset-0 opacity-0 cursor-pointer",
@@ -254,7 +258,7 @@ export function GalleryForm() {
                                             }
                                         }}
                                         onUploadError={(error: Error) => {
-                                            toast.error(`Upload failed: ${error.message}`)
+                                            toast.error(getImageUploadErrorMessage(error))
                                         }}
                                         appearance={{
                                             button: "w-full h-full absolute inset-0 opacity-0 cursor-pointer",

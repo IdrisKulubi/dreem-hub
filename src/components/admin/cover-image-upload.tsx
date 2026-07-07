@@ -1,5 +1,6 @@
 'use client'
 
+import { getImageUploadErrorMessage } from '@/lib/image-utils'
 import { UploadButton } from '@/lib/uploadthing'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
@@ -37,7 +38,10 @@ export function CoverImageUpload({
                         <p className="text-sm text-slate-600 dark:text-slate-400 mb-1 font-medium">
                             Click to upload cover photo
                         </p>
-                        <p className="text-xs text-slate-500">JPG, PNG or WebP · Max 4MB</p>
+                        <p className="text-xs text-slate-500">JPG, PNG or WebP · Max 8MB</p>
+                        <p className="text-xs text-slate-400 mt-2 text-center max-w-xs">
+                            If your image is larger, compress it to under 8MB before uploading.
+                        </p>
                     </div>
                     <UploadButton
                         endpoint="imageUploader"
@@ -51,7 +55,7 @@ export function CoverImageUpload({
                             }
                         }}
                         onUploadError={(error: Error) => {
-                            toast.error(`Upload failed: ${error.message}`)
+                            toast.error(getImageUploadErrorMessage(error))
                         }}
                         appearance={{
                             button: 'w-full h-full absolute inset-0 opacity-0 cursor-pointer',
